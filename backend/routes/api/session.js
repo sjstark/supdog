@@ -6,7 +6,10 @@ const { User } = require('../../db/models');
 
 const router = express.Router();
 
-// Log in
+
+//
+// ─── LOGIN ──────────────────────────────────────────────────────────────────────
+//
 router.post(
   '/',
   asyncHandler(async (req, res, next) => {
@@ -28,6 +31,17 @@ router.post(
       user,
     });
   }),
+);
+
+//
+// ─── LOG OUT ────────────────────────────────────────────────────────────────────
+//
+router.delete(
+  '/',
+  (_req, res) => {
+    res.clearCookie('token');
+    return res.json({ message: 'success' });
+  }
 );
 
 module.exports = router;
