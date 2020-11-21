@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from 'react'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 
 import {logout} from '../../store/session'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 
-export default function ProfileButton({sessionUser}) {
+export default function ProfileButton() {
   const dispatch = useDispatch()
   const [showMenu, setShowMenu] = useState(false)
+
+  const sessionUser = useSelector(state => state.session.user)
 
   const openMenu = (e) => {
     if (!showMenu){

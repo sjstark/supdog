@@ -112,7 +112,7 @@ export default function SignupFormPage () {
         </label>
         {profilePicPreview && (<img width="100px" id="profile-pic-preview" src={profilePicPreview} alt="Loading Profile Pic..." />)}
       </div>
-      <button type="submit">Log In</button>
+      <button type="submit">Sign Up</button>
     </form>
   )
 }

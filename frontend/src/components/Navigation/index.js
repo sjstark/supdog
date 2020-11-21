@@ -15,7 +15,7 @@ export default function Navigation({ isLoaded }) {
 
   if (sessionUser) {
     sessionLinks = (
-      <ProfileButton user={sessionUser}/>
+      <ProfileButton />
     )
   } else {
     sessionLinks = (
