@@ -1,0 +1,18 @@
+.signup-form {
+  margin: auto;
+  border: 1px solid rgba(0,0,0,.3);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.signup-form li {
+  color: red;
+}
+
+.signup-form label {
+  cursor: pointer;
+}
+
+.signup-form button {
+  cursor: pointer;
+}

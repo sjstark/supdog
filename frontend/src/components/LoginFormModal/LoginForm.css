@@ -1,0 +1,18 @@
+.login-form {
+  margin: auto;
+  border: 1px solid rgba(0,0,0,.3);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.login-form li {
+  color: red;
+}
+
+.login-form label {
+  cursor: pointer;
+}
+
+.login-form button {
+  cursor: pointer;
+}
