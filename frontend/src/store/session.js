@@ -24,7 +24,7 @@ export const login = (user) => {
       password
     }
 
-    const res = await fetch('/api/session', {method, body: JSON.stringify(body)})
+    const res = await fetch('/api/session', { method, body: JSON.stringify(body) })
 
     dispatch(setUser(res.data.user))
 
@@ -55,7 +55,7 @@ export const signup = (user) => {
   //   return res
   // }
   return async dispatch => {
-    const {profilePic, firstName, lastName, username, password , email } = user;
+    const { profilePic, firstName, lastName, username, password, email } = user;
     const formData = new FormData();
     formData.append('firstName', firstName)
     formData.append('lastName', lastName)
@@ -73,9 +73,12 @@ export const signup = (user) => {
     }
 
     return axios.post('/api/users/', formData, config)
-      .then(res=> {
+      .then(res => {
         const user = res.data;
         return dispatch(setUser(user))
+      })
+      .catch((err) => {
+        return err.response
       })
   }
 }
@@ -92,24 +95,24 @@ export const logout = () => {
 }
 
 
-let initialState = { user: null}
+let initialState = { user: null }
 
 function sessionReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
 
-  case SET_USER:
-    newState = Object.assign({}, state)
-    newState.user = action.payload
-    return newState
+    case SET_USER:
+      newState = Object.assign({}, state)
+      newState.user = action.payload
+      return newState
 
-  case REMOVE_USER:
-    newState = Object.assign({}, state)
-    newState.user = null
-    return newState
+    case REMOVE_USER:
+      newState = Object.assign({}, state)
+      newState.user = null
+      return newState
 
-  default:
-    return state
+    default:
+      return state
   }
 }
 

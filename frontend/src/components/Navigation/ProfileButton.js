@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import {logout} from '../../store/session'
+import { logout } from '../../store/session'
+
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
@@ -11,9 +12,10 @@ export default function ProfileButton() {
   const [showMenu, setShowMenu] = useState(false)
 
   const sessionUser = useSelector(state => state.session.user)
+  console.log(sessionUser.profilePicURL)
 
   const openMenu = (e) => {
-    if (!showMenu){
+    if (!showMenu) {
       setShowMenu(true)
     }
   }
@@ -39,8 +41,9 @@ export default function ProfileButton() {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <FontAwesomeIcon icon={faUserCircle} className="navBar__profile-icon"/>
+      <button onClick={openMenu} className="profileIcon">
+        {sessionUser.profilePicURL && (<img src={sessionUser.profilePicURL} alt="" style={{ width: '30px', height: '30px' }} />)}
+        {!sessionUser.profilePicURL && <FontAwesomeIcon icon={faUserCircle} className="navBar__profile-icon" />}
       </button>
       {showMenu && (
         <div className="navbar__profile-dropdown">

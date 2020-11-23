@@ -1,23 +1,32 @@
-import React, {useState, useEffect} from 'react';
-import {useDispatch} from 'react-redux'
-import {Switch, Route} from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux'
+import { Switch, Route } from 'react-router-dom'
+
 import Navigation from './components/Navigation';
-import SignupFormPage from './components/SignupFormPage'
+import EventDisplay from './components/EventDisplay';
+import NewEventForm from './components/NewEventForm';
+
 import { restoreUser } from './store/session';
 
 function App() {
   const dispatch = useDispatch()
   const [isLoaded, setIsLoaded] = useState(false)
+
+
   useEffect(() => {
     dispatch(restoreUser()).then(() => setIsLoaded(true))
   }, [dispatch])
 
   return (
     <>
-      <Navigation isLoaded={isLoaded}/>
+      <Navigation isLoaded={isLoaded} />
       {isLoaded && (
-      <Switch>
-      </Switch>
+        <>
+          <Switch>
+            <Route path="/new-event"> <NewEventForm /> </Route>
+            <Route exact path="/" component={EventDisplay} />
+          </Switch>
+        </>
       )}
     </>
   );

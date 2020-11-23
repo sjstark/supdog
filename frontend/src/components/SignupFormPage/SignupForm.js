@@ -1,11 +1,31 @@
-import React, {useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import compress from 'compress.js'
+
 import * as sessionActions from '../../store/session'
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 import './SignupForm.css'
 
-export default function SignupForm () {
+
+// Start of profile pic resizing function
+const resizeProfilePic = async (file) => {
+  const resizedImage = await compress.compress([file], {
+    size: 2, //Max file size set to 2Mb
+    quality: 1, //Sets quality of image (max of 1),
+    maxWidth: 300, //Sets the max width of the image to 300px
+    maxHeight: 300, //Sets the max height of the image
+    resize: true //confirm that we want to resize the picture
+  })
+
+  const img = resizedImage[0]; //compress.compress returns an array
+  const base64str = img.data;
+  const imgExt = img.ext;
+  const resizedFile = compress.convertBase64ToFile(base64str, imgExt)
+  return resizedFile
+}
+
+export default function SignupForm() {
   const dispatch = useDispatch()
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -16,6 +36,7 @@ export default function SignupForm () {
   const [profilePic, setProfilePic] = useState(null)
   const [profilePicPreview, setProfilePicPreview] = useState(null)
   const [errors, setErrors] = useState([])
+  const [sending, setSending] = useState(false)
 
   const sessionUser = useSelector(state => state.session.user)
 
@@ -23,6 +44,7 @@ export default function SignupForm () {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
 
     setErrors([]);
 
@@ -33,18 +55,25 @@ export default function SignupForm () {
       return setErrors(newErrors)
     }
 
-    const user = {email, username, firstName, lastName, profilePic, password}
+    setSending(true)
+
+    const user = { email, username, firstName, lastName, profilePic, password }
 
     return dispatch(sessionActions.signup(user))
+      .then((res) => {
+        if (res.statusText !== 'OK') throw res
+        return res
+      })
       .catch((res) => {
         if (res.data && res.data.errors) {
           setErrors(res.data.errors)
+          setSending(false)
         }
       })
 
   }
 
-  const updateFile = (e) => {
+  const updateFile = async (e) => {
 
     const { target:
       {
@@ -52,6 +81,7 @@ export default function SignupForm () {
         files: [file]
       }
     } = e;
+
 
     if (file) {
       let reader = new FileReader();
@@ -64,6 +94,7 @@ export default function SignupForm () {
     return validity.valid && setProfilePic(file);
   }
 
+
   return (
     <form onSubmit={handleSubmit} className='signup-form'>
       <ul>
@@ -72,37 +103,37 @@ export default function SignupForm () {
       <div>
         <label>
           First Name:
-          <input required type="text" value={firstName} onChange={({target}) => setFirstName(target.value)}/>
+          <input required type="text" value={firstName} onChange={({ target }) => setFirstName(target.value)} />
         </label>
       </div>
       <div>
         <label>
           Last Name:
-          <input required type="text" value={lastName} onChange={({target}) => setLastName(target.value)}/>
+          <input required type="text" value={lastName} onChange={({ target }) => setLastName(target.value)} />
         </label>
       </div>
       <div>
         <label>
           Email:
-          <input required type="text" value={email} onChange={({target}) => setEmail(target.value)}/>
+          <input required type="text" value={email} onChange={({ target }) => setEmail(target.value)} />
         </label>
       </div>
       <div>
         <label>
           Username:
-          <input required type="text" value={username} onChange={({target}) => setUsername(target.value)}/>
+          <input required type="text" value={username} onChange={({ target }) => setUsername(target.value)} />
         </label>
       </div>
       <div>
         <label>
           Password:
-          <input required type="password" value={password} onChange={({target}) => setPassword(target.value)} />
+          <input required type="password" value={password} onChange={({ target }) => setPassword(target.value)} />
         </label>
       </div>
       <div>
         <label>
           Confirm Password:
-          <input required type="password" value={confirmPassword} onChange={({target}) => setConfirmPassword(target.value)} />
+          <input required type="password" value={confirmPassword} onChange={({ target }) => setConfirmPassword(target.value)} />
         </label>
       </div>
       <div>
@@ -112,7 +143,9 @@ export default function SignupForm () {
         </label>
         {profilePicPreview && (<img width="100px" id="profile-pic-preview" src={profilePicPreview} alt="Loading Profile Pic..." />)}
       </div>
-      <button type="submit">Sign Up</button>
+      {<button type="submit">Sign Up</button>}
+      {/* {!sending && <button type="submit">Sign Up</button>} */}
+      {/* {sending && <button disabled={true}>Sign Up</button>} */}
     </form>
   )
 }
