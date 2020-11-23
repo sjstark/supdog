@@ -9,7 +9,6 @@ export default function LoginFormModal() {
   return (
     <>
       <button onClick={() => {
-          console.log('showing modal')
           setShowModal(true)
         }}>Log In</button>
       {showModal && (

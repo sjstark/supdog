@@ -4,7 +4,6 @@ import * as sessionActions from '../../store/session'
 
 import './LoginForm.css'
 
-
 export default function LoginForm() {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState('')
