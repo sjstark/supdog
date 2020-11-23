@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     about: {
-      type: DataTypes.STRING
+      type: DataTypes.TEXT
     },
   }, {});
   Event.associate = function(models) {
