@@ -1,6 +1,6 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom'
-import {useSelector} from 'react-redux'
+import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import ProfileButton from './ProfileButton';
 
 import LoginFormModal from '../LoginFormModal'
@@ -16,7 +16,10 @@ export default function Navigation({ isLoaded }) {
 
   if (sessionUser) {
     sessionLinks = (
-      <ProfileButton />
+      <>
+        <NavLink exact to="/new-event">Create A New Event</NavLink>
+        <ProfileButton />
+      </>
     )
   } else {
     sessionLinks = (
