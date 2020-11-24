@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom'
 import Navigation from './components/Navigation';
 import EventDisplay from './components/EventDisplay';
 import NewEventForm from './components/NewEventForm';
+import ImageUpload from './components/ImageCropper/ImageUpload'
 
 import { restoreUser } from './store/session';
 
@@ -24,6 +25,7 @@ function App() {
         <>
           <Switch>
             <Route path="/new-event"> <NewEventForm /> </Route>
+            <Route path='/image-test'> <ImageUpload /> </Route>
             <Route exact path="/" component={EventDisplay} />
           </Switch>
         </>
