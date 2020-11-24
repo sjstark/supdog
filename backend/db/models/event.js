@@ -37,6 +37,9 @@ module.exports = (sequelize, DataTypes) => {
     Event.hasMany(models.Ticket, {
       foreignKey: 'eventId'
     })
+    Event.belongsTo(models.Category, {
+      foreignKey: 'categoryId'
+    })
 
   };
   return Event;

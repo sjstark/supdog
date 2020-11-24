@@ -50,14 +50,17 @@ module.exports = {
       }
     })
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete('SoldTickets', {
-      userId: { [Op.in]: [demoUser.id] }
-    })
-      .then(() => queryInterface.bulkDelete('SoldTickets', {
-        userId: { [Op.startsWith]: 'FakeUser' }
-      }))
+    let fakeUsers = await User.findAll({ where: { username: { [Op.startsWith]: 'FakeUser' } } })
+    let fakeUserIds = fakeUsers.map(user => user.id)
+    fakeUserIds.push(demoUser.id)
+    return queryInterface.bulkDelete('SoldTickets',
+      {
+        userId: { [Op.in]: fakeUserIds }
+      }
+
+    )
       .then(() => queryInterface.bulkDelete('Tickets', {
-        eventId: { [Op.in]: [demoEvent.id] }
+        eventId: { [Op.in]: fakeUserIds }
       }))
   }
 };
