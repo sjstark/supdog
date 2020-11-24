@@ -25,7 +25,7 @@ function App() {
         <>
           <Switch>
             <Route path="/new-event"> <NewEventForm /> </Route>
-            <Route path='/image-test'> <ImageUpload /> </Route>
+            <Route path='/image-test'> <ImageUpload aspect={1} /> </Route>
             <Route exact path="/" component={EventDisplay} />
           </Switch>
         </>

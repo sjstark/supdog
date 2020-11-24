@@ -3,7 +3,7 @@ import ImageCropper from './ImageCropper'
 
 import './cropper.css'
 
-const ImageUpload = () => {
+const ImageUpload = ({ aspect }) => {
   const [blob, setBlob] = useState(null)
   const [inputImg, setInputImg] = useState('')
 
@@ -39,10 +39,11 @@ const ImageUpload = () => {
         onChange={onInputChange}
       />
       {
-        inputImg && (
+        (
           <ImageCropper
             getBlob={getBlob}
             inputImg={inputImg}
+            aspect={aspect}
           />
         )
       }
