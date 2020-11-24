@@ -3,18 +3,23 @@ import Axios from 'axios'
 const ADD_EVENT = 'events/addEvent'
 
 export const createNewEvent = (event) => {
-  const { title, summary, organizer, about, eventPic } = event
+  const { title, summary, organizer, about, eventPic, tickets } = event
 
   const formData = new FormData();
   formData.append('title', title)
   formData.append('summary', summary)
   formData.append('organizer', organizer)
+  formData.append('tickets', tickets)
   if (about) {
     formData.append('about', about)
   }
   if (eventPic) {
     formData.append('eventPic', eventPic)
   }
+
+  // tickets.forEach((ticket, idx) => {
+  //   formData.append(`ticket${idx}`, JSON.stringify(ticket))
+  // })
 
   const config = {
     headers: {

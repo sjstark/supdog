@@ -14,8 +14,14 @@ export default function NewEventForm() {
   const [about, setAbout] = useState('')
   const [eventPic, setEventPic] = useState(null)
   const [eventPicPreview, setEventPicPreview] = useState(null)
+
+  const [tickets, setTickets] = useState([])
+  const [ticketType, setTicketType] = useState('')
+  const [ticketQty, setTicketQty] = useState(0)
+
   const [errors, setErrors] = useState([])
   const [sending, setSending] = useState(false)
+  const [step, setStep] = useState(0)
 
   const sessionUser = useSelector(state => state.session.user)
 
@@ -29,7 +35,7 @@ export default function NewEventForm() {
 
     setErrors([])
 
-    const event = { title, summary, about, eventPic, organizer: sessionUser.id }
+    const event = { title, summary, about, eventPic, organizer: sessionUser.id, tickets: JSON.stringify(tickets) }
 
     return createNewEvent(event)
       .then((res) => {
@@ -67,22 +73,42 @@ export default function NewEventForm() {
     return validity.valid && setEventPic(file);
   }
 
+  const addTicket = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    const ticket = { name: ticketType, quantity: ticketQty }
+    setTickets([...tickets, ticket])
+    setTicketType('')
+    setTicketQty(0)
+  }
 
-  return (
-    <form onSubmit={handleSubmit} className="event-create-form">
+  const nextPage = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setStep(step + 1)
+  }
+
+  const lastPage = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setStep(step - 1)
+  }
+
+  const EventDetailsForm = (
+    <form className="event-create-form">
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <div>
         <label>
           Event Title:
-          <input required type="text" value={title} onChange={({ target }) => setTitle(target.value)} />
+          <input type="text" value={title} onChange={({ target }) => setTitle(target.value)} />
         </label>
       </div>
       <div>
         <label>
           Summary:
-          <textarea required rows={2} cols={50} value={summary} onChange={({ target }) => setSummary(target.value)} />
+          <textarea rows={2} cols={50} value={summary} onChange={({ target }) => setSummary(target.value)} />
         </label>
       </div>
       <div>
@@ -98,9 +124,71 @@ export default function NewEventForm() {
         </label>
         {eventPicPreview && (<img width="500px" id="event-pic-preview" src={eventPicPreview} alt="Loading Event Pic..." />)}
       </div>
-      {!sending && <button type="submit">Create Event</button>}
-      {sending && <button disabled={true}>Create Event</button>}
+      <button onClick={() => history.replace('/')}>Cancel Event Creation</button>
+      {!sending && <button onClick={nextPage}>Next Step</button>}
+      {sending && <button disabled={true}>Next Step</button>}
 
     </form>
+  )
+
+  const removeTicket = (idx) => {
+    setTickets([...tickets.slice(0, idx), ...tickets.slice(idx + 1)])
+  }
+
+  const TicketCreateForm = (
+    <>
+      <form onSubmit={handleSubmit} className="ticket-create-form">
+        <ul>
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>
+        <div>
+          <label>
+            Ticket Title:
+            <input type="text" value={ticketType} onChange={({ target }) => setTicketType(target.value)} />
+          </label>
+        </div>
+        <div>
+          <label>
+            Quantity Available:
+            <input type='number' value={ticketQty} onChange={({ target }) => setTicketQty(target.value)} />
+          </label>
+        </div>
+        <button onClick={() => history.replace('/')}>Cancel Event Creation</button>
+        <button onClick={lastPage}>Go Back</button>
+        <button onClick={addTicket}>Create Current Ticket</button>
+        {(tickets.length >= 1) && (<button type='submit'>Create Event</button>)}
+        {!(tickets.length >= 1) && (<button disabled={true} type='submit'>Create Event</button>)}
+
+        {/* {!sending && <button type="submit">Create Event</button>}
+        {sending && <button disabled={true}>Create Event</button>} */}
+
+      </form>
+      <ul>
+        {tickets && tickets.map((ticket, idx) => {
+          return (
+            <li key={ticket.name}>
+              <span>Ticket Type: {ticket.name} </span>
+              <span>Quanitity: {ticket.quantity}</span>
+              <button onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                removeTicket(idx)
+              }}>Remove Ticket</button>
+            </li>
+          )
+        })}
+      </ul>
+    </>
+  )
+
+  const formSteps = [
+    EventDetailsForm,
+    TicketCreateForm
+  ]
+
+  return (
+    <>
+      {formSteps[step]}
+    </>
   )
 }
