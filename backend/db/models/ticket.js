@@ -22,7 +22,9 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {});
   Ticket.associate = function (models) {
-    // associations can be defined here
+    Ticket.belongsTo(models.Event, {
+      foreignKey: "eventId"
+    })
   };
   return Ticket;
 };
