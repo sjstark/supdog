@@ -4,8 +4,10 @@ const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { requireAuth } = require('../../utils/auth');
 const { Event, User } = require('../../db/models');
+
+const ticketsRouter = require('./tickets')
 
 const {
   s3,
@@ -14,6 +16,8 @@ const {
 } = require("../../utils/awsS3");
 
 const router = express.Router();
+
+router.use('/:eventId/tickets', ticketsRouter)
 
 //
 // ─── MIDDLEWARE FUNCTIONS ───────────────────────────────────────────────────────

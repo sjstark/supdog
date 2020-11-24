@@ -1,4 +1,7 @@
 'use strict';
+
+const { SoldTicket }
+
 module.exports = (sequelize, DataTypes) => {
   const Ticket = sequelize.define('Ticket', {
     eventId: {
@@ -13,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    string: {
+    sold: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
@@ -25,6 +28,27 @@ module.exports = (sequelize, DataTypes) => {
     Ticket.belongsTo(models.Event, {
       foreignKey: "eventId"
     })
+    Ticket.hasMany(models.SoldTicket, {
+      as: 'soldTickets',
+      foreignKey: "ticketId"
+    })
   };
+
+  //
+  // ─── TICKET PROTOTYPE METHOD ────────────────────────────────────────────────────
+  //
+
+  Ticket.prototype.sellTicketTo = async function (userId) {
+    if (this.sold >= this.quantity) return false
+    const soldTicket = await SoldTicket.create({
+      ticketId: this.id,
+      userId: userId
+    })
+    this.sold++
+    await this.save()
+    return soldTicket
+  }
+
+
   return Ticket;
 };

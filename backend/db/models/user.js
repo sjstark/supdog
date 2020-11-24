@@ -1,11 +1,11 @@
 'use strict';
 
 const bcrypt = require('bcryptjs');
-const {Validator} = require('sequelize')
+const { Validator } = require('sequelize')
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    username:{
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -77,9 +77,13 @@ module.exports = (sequelize, DataTypes) => {
       },
     ]
   });
-  User.associate = function(models) {
+  User.associate = function (models) {
     User.hasMany(models.Event, {
       foreignKey: 'organizer'
+    })
+    User.hasMany(models.SoldTicket, {
+      as: 'ownedTickets',
+      foreignKey: 'userId'
     })
   };
 
@@ -87,17 +91,17 @@ module.exports = (sequelize, DataTypes) => {
   // ─── USER MODEL METHODS ─────────────────────────────────────────────────────────
   //
 
-  User.prototype.toSafeObject = function() {
+  User.prototype.toSafeObject = function () {
     const { id, username, email, firstName, lastName, profilePicURL } = this;
     return { id, username, email, firstName, lastName, profilePicURL };
   };
 
   User.prototype.validatePassword = function (password) {
     return bcrypt.compareSync(password, this.hashedPassword.toString());
-   };
+  };
 
   User.getCurrentUserById = async function (id) {
-  return await User.scope('currentUser').findByPk(id);
+    return await User.scope('currentUser').findByPk(id);
   };
 
   User.login = async function ({ credential, password }) {

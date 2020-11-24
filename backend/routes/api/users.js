@@ -7,6 +7,8 @@ const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 
+const ticketsRouter = require('./tickets')
+
 const {
   s3,
   singlePublicFileUpload,
@@ -14,6 +16,8 @@ const {
 } = require("../../utils/awsS3");
 
 const router = express.Router();
+
+router.use('/:userId/tickets', ticketsRouter)
 
 //
 // ─── MIDDLEWARE FUNCTIONS ───────────────────────────────────────────────────────
@@ -60,7 +64,7 @@ router.post(
   singleMulterUpload('profilePic'),
   validateSignup,
   asyncHandler(async (req, res) => {
-    const { email, password, username, firstName, lastName} = req.body;
+    const { email, password, username, firstName, lastName } = req.body;
 
     let profilePicURL = null;
     if (req.file) profilePicURL = await singlePublicFileUpload(req.file, 'prof-pics');
