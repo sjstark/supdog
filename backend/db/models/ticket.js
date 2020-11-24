@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
       userId: userId
     }
     this.increment('sold')
-    await sequelize.model('SoldTicket').create(ticketSale)
+    return await sequelize.model('SoldTicket').create(ticketSale)
   }
 
 

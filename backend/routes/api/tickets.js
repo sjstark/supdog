@@ -5,7 +5,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const { requireAuth } = require('../../utils/auth');
-const { Event, User } = require('../../db/models');
+const { Event, User, Ticket, SoldTicket } = require('../../db/models');
 
 const {
   s3,
@@ -13,7 +13,7 @@ const {
   singleMulterUpload,
 } = require("../../utils/awsS3");
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 //
 // ─── MIDDLEWARE FUNCTIONS ───────────────────────────────────────────────────────
@@ -40,27 +40,12 @@ const router = express.Router();
 //   handleValidationErrors,
 // ];
 
-// router.post(
-//   '',
-//   singleMulterUpload('eventPic'),
-//   requireAuth,
-//   validateEvent,
-//   asyncHandler(async (req, res) => {
-//     const { title, summary, about, organizer } = req.body;
-
-//     let eventPicURL = null;
-//     if (req.file) eventPicURL = await singlePublicFileUpload(req.file, 'event-pics')
-
-//     const event = await Event.create({ title, summary, about, eventPicURL, organizer })
-
-//     return res.json(event)
-//   })
-// )
-
 router.get(
   '',
   asyncHandler(async (req, res) => {
     let paramsKeys = Object.keys(req.params)
+
+    console.log(req.params)
 
     let tickets = []
 
@@ -68,18 +53,44 @@ router.get(
     if (paramsKeys.includes('eventId')) {
       tickets = await Ticket.findAll({
         where: {
-          eventId: params.eventId
+          eventId: req.params.eventId
         }
       })
     } else {
       tickets = await SoldTicket.findAll({
+        include: {
+          model: Ticket,
+          attributes: ['name'],
+          include: {
+            model: Event,
+            attributes: ['title'],
+          }
+        },
         where: {
-          userId: params.userId
+          userId: req.params.userId
         }
       })
     }
 
     res.json(tickets)
+  })
+)
+
+// router.post(
+//   '',
+//   validateTicket,
+//     (req, res) => {
+
+// })
+
+router.post(
+  '/:ticketId',
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    let ticket = await Ticket.findByPk(parseInt(req.params.ticketId, 10))
+    let ticketSale = await ticket.sellTicketTo(req.user.id)
+    if (!ticketSale) return res.json('Ticket is sold out for this event')
+    return res.json(ticketSale)
   })
 )
 

@@ -50,12 +50,22 @@ router.post(
   requireAuth,
   validateEvent,
   asyncHandler(async (req, res) => {
-    const { title, summary, about, organizer } = req.body;
+    const {
+      title,
+      summary,
+      about,
+      organizer,
+      tickets //an array of ticket objects to create -- A ticket object needs eventId (to come from event creation), name, and quantity
+    } = req.body;
 
     let eventPicURL = null;
     if (req.file) eventPicURL = await singlePublicFileUpload(req.file, 'event-pics')
 
     const event = await Event.create({ title, summary, about, eventPicURL, organizer })
+
+    tickets.forEach(async ticket => {
+      await ticket.create({ ...ticket, eventId: event.id })
+    })
 
     return res.json(event)
   })
