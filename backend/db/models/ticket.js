@@ -1,7 +1,5 @@
 'use strict';
 
-const { SoldTicket }
-
 module.exports = (sequelize, DataTypes) => {
   const Ticket = sequelize.define('Ticket', {
     eventId: {
@@ -24,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
   }, {});
+
   Ticket.associate = function (models) {
     Ticket.belongsTo(models.Event, {
       foreignKey: "eventId"
@@ -40,13 +39,12 @@ module.exports = (sequelize, DataTypes) => {
 
   Ticket.prototype.sellTicketTo = async function (userId) {
     if (this.sold >= this.quantity) return false
-    const soldTicket = await SoldTicket.create({
+    const ticketSale = {
       ticketId: this.id,
       userId: userId
-    })
-    this.sold++
-    await this.save()
-    return soldTicket
+    }
+    this.increment('sold')
+    await sequelize.model('SoldTicket').create(ticketSale)
   }
 
 

@@ -1,10 +1,10 @@
 'use strict';
 
-const { Event, User } = require('../models')
+const { Event, User, Ticket, SoldTicket } = require('../models')
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    let demoEvent = Event.findOne({
+  up: async (queryInterface, Sequelize) => {
+    let demoEvent = await Event.findOne({
       where: {
         title: 'Thanksgiving Day Parade'
       }
@@ -12,22 +12,59 @@ module.exports = {
     return queryInterface.bulkInsert('Tickets', [
       {
         eventId: demoEvent.id,
-        name: 'General Admission',
+        name: 'Demo General Admission',
         quantity: 50,
-        sold: 5,
+        sold: 0,
+      },
+      {
+        eventId: demoEvent.id,
+        name: 'Demo VIP Access',
+        quantity: 12,
+        sold: 0,
       },
     ])
+      .then(async (res) => {
+        let GATickets = await Ticket.findOne({ where: { name: 'Demo General Admission' } })
+        let VIPTickets = await Ticket.findOne({ where: { name: 'Demo VIP Access' } })
+        let demoUser = await User.findOne({ where: { email: 'demo@user.io' } })
+        await GATickets.sellTicketTo(demoUser.id)
+        await VIPTickets.sellTicketTo(demoUser.id)
+        for (let i = 0; i < 5; i++) {
+          await VIPTickets.sellTicketTo(getRandomInt(1, 16))
+        }
+        for (let i = 0; i < 10; i++) {
+          await GATickets.sellTicketTo(getRandomInt(1, 16))
+        }
+      })
   },
 
-  down: (queryInterface, Sequelize) => {
-    let demoEvent = Event.findOne({
+  down: async (queryInterface, Sequelize) => {
+    let demoEvent = await Event.findOne({
       where: {
         title: 'Thanksgiving Day Parade'
       }
     })
-    const Op = Sequelize.Op;
-    return queryInterface.bulkDelete('Tickets', {
-      eventId: { [Op.in]: [demoEvent.id] }
+    let demoUser = await User.findOne({
+      where: {
+        email: 'demo@user.io'
+      }
     })
+    const Op = Sequelize.Op;
+    return queryInterface.bulkDelete('SoldTickets', {
+      userId: { [Op.in]: [demoUser.id] }
+    })
+      .then(() => queryInterface.bulkDelete('SoldTickets', {
+        userId: { [Op.startsWith]: 'FakeUser' }
+      }))
+      .then(() => queryInterface.bulkDelete('Tickets', {
+        eventId: { [Op.in]: [demoEvent.id] }
+      }))
   }
 };
+
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}

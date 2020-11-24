@@ -1,5 +1,7 @@
 'use strict';
 
+const Ticket = require('./index')
+
 module.exports = (sequelize, DataTypes) => {
   const SoldTicket = sequelize.define('SoldTicket', {
     ticketId: {
@@ -19,5 +21,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId'
     })
   };
+
   return SoldTicket;
 };
