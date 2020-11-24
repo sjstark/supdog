@@ -17,9 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     sold: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      validate: {
-        max: this.quantity
-      }
+      defaultValue: 0,
     },
   }, {});
 

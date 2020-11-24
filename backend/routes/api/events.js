@@ -5,7 +5,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const { requireAuth } = require('../../utils/auth');
-const { Event, User } = require('../../db/models');
+const { Event, User, Ticket } = require('../../db/models');
 
 const ticketsRouter = require('./tickets')
 
@@ -55,8 +55,14 @@ router.post(
       summary,
       about,
       organizer,
-      tickets //an array of ticket objects to create -- A ticket object needs eventId (to come from event creation), name, and quantity
     } = req.body;
+
+    const tickets = JSON.parse(req.body.tickets)
+    // tickets = [];
+    // Object.keys(req.body).filter(key => key.startsWith('ticket')).forEach(ticketKey => {
+    //   tickets.push(req.body[ticketKey])
+    // })
+
 
     let eventPicURL = null;
     if (req.file) eventPicURL = await singlePublicFileUpload(req.file, 'event-pics')
@@ -64,7 +70,8 @@ router.post(
     const event = await Event.create({ title, summary, about, eventPicURL, organizer })
 
     tickets.forEach(async ticket => {
-      await ticket.create({ ...ticket, eventId: event.id })
+      let newTicket = { name: ticket.name, quantity: parseInt(ticket.quantity, 10), eventId: event.id }
+      await Ticket.create(newTicket)
     })
 
     return res.json(event)

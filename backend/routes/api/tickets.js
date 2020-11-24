@@ -45,8 +45,6 @@ router.get(
   asyncHandler(async (req, res) => {
     let paramsKeys = Object.keys(req.params)
 
-    console.log(req.params)
-
     let tickets = []
 
     //depending on if entry param is event or user, find all keys where the id is equal to that.
