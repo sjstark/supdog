@@ -36,7 +36,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    })
+      .then(() => queryInterface.addIndex('Tickets', ['eventId'], {}));
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Tickets');
