@@ -5,7 +5,7 @@ import { Switch, Route } from 'react-router-dom'
 import Navigation from './components/Navigation';
 import EventDisplay from './components/EventDisplay';
 import NewEventForm from './components/NewEventForm';
-import ImageUpload from './components/ImageCropper/ImageUpload'
+import ImageUpload from './components/ImageCropper/ImageInput'
 
 import { restoreUser } from './store/session';
 

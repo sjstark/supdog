@@ -12,7 +12,6 @@ export default function ProfileButton() {
   const [showMenu, setShowMenu] = useState(false)
 
   const sessionUser = useSelector(state => state.session.user)
-  console.log(sessionUser.profilePicURL)
 
   const openMenu = (e) => {
     if (!showMenu) {

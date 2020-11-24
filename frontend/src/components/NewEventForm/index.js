@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import { Redirect, useHistory } from 'react-router-dom'
 
 import { createNewEvent } from '../../store/event'
+
+import ImageInput from '../ImageCropper/ImageInput'
 
 
 export default function NewEventForm() {
@@ -13,7 +15,6 @@ export default function NewEventForm() {
   const [summary, setSummary] = useState('')
   const [about, setAbout] = useState('')
   const [eventPic, setEventPic] = useState(null)
-  const [eventPicPreview, setEventPicPreview] = useState(null)
 
   const [tickets, setTickets] = useState([])
   const [ticketType, setTicketType] = useState('')
@@ -50,27 +51,6 @@ export default function NewEventForm() {
           setSending(false)
         }
       })
-  }
-
-  const updateFile = async (e) => {
-
-    const { target:
-      {
-        validity,
-        files: [file]
-      }
-    } = e;
-
-
-    if (file) {
-      let reader = new FileReader();
-      reader.onload = (e) => {
-        setEventPicPreview(e.target.result)
-      }
-      reader.readAsDataURL(file)
-    }
-
-    return validity.valid && setEventPic(file);
   }
 
   const addTicket = (e) => {
@@ -120,9 +100,14 @@ export default function NewEventForm() {
       <div>
         <label>
           Event Picture:
+          <span>2160px x 1080px (2:1 ratio)</span>
+        </label>
+        <ImageInput aspect={2} onChange={setEventPic} height={1080} width={2160} />
+        {/* <label>
+          Event Picture:
           <input id='event-pic-upload' type="file" onChange={updateFile} />
         </label>
-        {eventPicPreview && (<img width="500px" id="event-pic-preview" src={eventPicPreview} alt="Loading Event Pic..." />)}
+        {eventPicPreview && (<img width="500px" id="event-pic-preview" src={eventPicPreview} alt="Loading Event Pic..." />)} */}
       </div>
       <button onClick={() => history.replace('/')}>Cancel Event Creation</button>
       {!sending && <button onClick={nextPage}>Next Step</button>}

@@ -8,15 +8,15 @@ const createImage = (url) =>
     image.src = url
   })
 
-export const getCroppedImg = async (imageSrc, crop) => {
+export const getCroppedImg = async (imageSrc, crop, width = 250, height = 250) => {
   const image = await createImage(imageSrc)
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
 
   /* setting canvas width & height allows us to
   resize from the original image resolution */
-  canvas.width = 250
-  canvas.height = 250
+  canvas.width = width
+  canvas.height = height
 
   ctx.drawImage(
     image,

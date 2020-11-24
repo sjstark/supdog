@@ -43,17 +43,6 @@ export const restoreUser = () => {
 }
 
 export const signup = (user) => {
-  // return async dispatch => {
-
-  //   const res = await fetch('/api/users', {
-  //     method: 'POST',
-  //     body: JSON.stringify(user)
-  //   })
-
-  //   dispatch(setUser(res.data.user))
-
-  //   return res
-  // }
   return async dispatch => {
     const { profilePic, firstName, lastName, username, password, email } = user;
     const formData = new FormData();

@@ -3,13 +3,14 @@ import ImageCropper from './ImageCropper'
 
 import './cropper.css'
 
-const ImageUpload = ({ aspect }) => {
+const ImageInput = ({ aspect, onChange, width, height }) => {
   const [blob, setBlob] = useState(null)
   const [inputImg, setInputImg] = useState('')
 
   const getBlob = (blob) => {
     //function to pass the blob from inner components up to this component
     setBlob(blob)
+    onChange(blob)
   }
 
   const onInputChange = (e) => {
@@ -26,13 +27,8 @@ const ImageUpload = ({ aspect }) => {
     }
   }
 
-  const handleSubmiitImage = (e) => {
-    e.preventDefault()
-    console.log(blob)
-  }
-
   return (
-    <form onSubmit={handleSubmiitImage}>
+    <>
       <input
         type="file"
         accept='image/*'
@@ -44,12 +40,13 @@ const ImageUpload = ({ aspect }) => {
             getBlob={getBlob}
             inputImg={inputImg}
             aspect={aspect}
+            width={width}
+            height={height}
           />
         )
       }
-      <button type="submit">Submit</button>
-    </form>
+    </>
   )
 }
 
-export default ImageUpload
+export default ImageInput

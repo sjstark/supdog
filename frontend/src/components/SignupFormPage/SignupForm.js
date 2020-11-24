@@ -4,6 +4,7 @@ import compress from 'compress.js'
 
 import * as sessionActions from '../../store/session'
 import { Redirect } from 'react-router-dom'
+import ImageInput from '../ImageCropper/ImageInput'
 
 import './SignupForm.css'
 
@@ -34,7 +35,7 @@ export default function SignupForm() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [profilePic, setProfilePic] = useState(null)
-  const [profilePicPreview, setProfilePicPreview] = useState(null)
+  // const [profilePicPreview, setProfilePicPreview] = useState(null)
   const [errors, setErrors] = useState([])
   const [sending, setSending] = useState(false)
 
@@ -73,26 +74,26 @@ export default function SignupForm() {
 
   }
 
-  const updateFile = async (e) => {
+  // const updateFile = async (e) => {
 
-    const { target:
-      {
-        validity,
-        files: [file]
-      }
-    } = e;
+  //   const { target:
+  //     {
+  //       validity,
+  //       files: [file]
+  //     }
+  //   } = e;
 
 
-    if (file) {
-      let reader = new FileReader();
-      reader.onload = (e) => {
-        setProfilePicPreview(e.target.result)
-      }
-      reader.readAsDataURL(file)
-    }
+  //   if (file) {
+  //     let reader = new FileReader();
+  //     reader.onload = (e) => {
+  //       setProfilePicPreview(e.target.result)
+  //     }
+  //     reader.readAsDataURL(file)
+  //   }
 
-    return validity.valid && setProfilePic(file);
-  }
+  //   return validity.valid && setProfilePic(file);
+  // }
 
 
   return (
@@ -137,11 +138,12 @@ export default function SignupForm() {
         </label>
       </div>
       <div>
-        <label>
+        <ImageInput aspect={1} onChange={setProfilePic} />
+        {/* <label>
           Profile Picture:
           <input id='profile-pic-upload' type="file" onChange={updateFile} />
         </label>
-        {profilePicPreview && (<img width="100px" id="profile-pic-preview" src={profilePicPreview} alt="Loading Profile Pic..." />)}
+        {profilePicPreview && (<img width="100px" id="profile-pic-preview" src={profilePicPreview} alt="Loading Profile Pic..." />)} */}
       </div>
       {<button type="submit">Sign Up</button>}
       {/* {!sending && <button type="submit">Sign Up</button>} */}
