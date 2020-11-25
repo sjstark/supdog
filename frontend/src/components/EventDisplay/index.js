@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react'
+import { connect, useDispatch } from 'react-redux'
 import { fetch } from '../../store/csrf'
 
 import EventCard from '../EventCard'
 
+function EventDisplay({ events }) {
 
-export default function EventDisplay() {
-  const [events, setEvents] = useState([])
-
-  useEffect(async () => {
-    const response = await (fetch('/api/events'))
-
-    const eventsJSON = response.data.events
-
-    setEvents(eventsJSON)
-
-  }, [])
+  // useEffect(async () => {
+  //   const response = await (fetch('/api/events'))
+  //   const eventsJSON = response.data.events
+  //   // setEvents(eventsJSON)
+  // }, [])
 
   return (
     <ul>
@@ -27,3 +23,8 @@ export default function EventDisplay() {
     </ul>
   )
 }
+
+const mapStateToProps = state => ({ events: state.events })
+
+
+export default connect(mapStateToProps)(EventDisplay)

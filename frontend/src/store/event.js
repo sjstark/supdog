@@ -79,9 +79,7 @@ export const createNewEvent = (event) => {
 
 }
 
-const initialState = {
-  events: null
-}
+const initialState = []
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
@@ -92,13 +90,13 @@ export default (state = initialState, { type, payload }) => {
     //   return state.events
 
     case SET_EVENTS:
-      return { ...payload }
+      return [...payload]
 
     case ADD_EVENTS:
-      return { ...state, ...payload }
+      return [...state, ...payload]
 
     case CLEAR_EVENTS:
-      return { events: null }
+      return []
 
     default:
       return state
