@@ -5,12 +5,16 @@ import { Switch, Route } from 'react-router-dom'
 import Navigation from './components/Navigation';
 import EventDisplay from './components/EventDisplay';
 import NewEventForm from './components/NewEventForm';
+import CategoryBar from './components/CategoryBar';
 import ImageUpload from './components/ImageCropper/ImageInput'
 
 import { restoreUser } from './store/session';
 
 function App() {
   const dispatch = useDispatch()
+
+  const [currentView, setCurrentView] = useState(null)
+
   const [isLoaded, setIsLoaded] = useState(false)
 
 
@@ -18,19 +22,38 @@ function App() {
     dispatch(restoreUser()).then(() => setIsLoaded(true))
   }, [dispatch])
 
+
+  /*
+
+  Base level components
+  - NavBar - Navigation links for home (logo), search, login, signup, and profile options
+  - CatBar - Navigation links for categories, a list of category icons and titles
+  - Events Display - The main content of the page.
+    - All Events View
+    - Search Events View
+    - Category Events View
+    - Create Event View
+    - Tickets View
+
+
+  */
   return (
-    <>
+    <div className="main-wrapper">
       <Navigation isLoaded={isLoaded} />
+      <CategoryBar isLoaded={isLoaded} />
+
+
       {isLoaded && (
         <>
           <Switch>
-            <Route path="/new-event"> <NewEventForm /> </Route>
-            <Route path='/image-test'> <ImageUpload aspect={1} /> </Route>
-            <Route exact path="/" component={EventDisplay} />
+
+            {/* <Route path="/new-event"> <NewEventForm /> </Route> */}
+            {/* <Route path='/image-test'> <ImageUpload aspect={1} /> </Route> */}
+            {/* <Route exact path="/" component={EventDisplay} /> */}
           </Switch>
         </>
       )}
-    </>
+    </div>
   );
 }
 

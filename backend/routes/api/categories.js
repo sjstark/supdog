@@ -5,7 +5,8 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const { requireAuth } = require('../../utils/auth');
-const { Event, User, Ticket, SoldTicket } = require('../../db/models');
+const { Event, User, Ticket, SoldTicket, Category } = require('../../db/models');
+
 
 const router = express.Router({ mergeParams: true });
 
@@ -32,10 +33,19 @@ router.get(
 )
 
 router.get(
+  '',
+  asyncHandler(async (req, res) => {
+    res.json(await Category.findAll({
+      attributes: ['id', 'title', 'icon', 'color']
+    }))
+  })
+)
+
+router.get(
   '/:categoryId(\\d+)/count',
   asyncHandler(async (req, res) => {
     const categoryId = parseInt(req.params.categoryId, 10)
-    return await Event.count({ where: { categoryId } })
+    res.json(await Event.count({ where: { categoryId } }))
   })
 )
 

@@ -12,6 +12,14 @@ module.exports = {
         type: Sequelize.STRING(50),
         allowNull: false
       },
+      icon: {
+        type: Sequelize.STRING(60),
+        allowNull: true
+      },
+      color: {
+        type: Sequelize.STRING(7),
+        allowNull: true
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

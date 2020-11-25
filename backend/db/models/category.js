@@ -8,6 +8,20 @@ module.exports = (sequelize, DataTypes) => {
         len: [4, 50]
       }
     },
+    icon: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [4, 60]
+      }
+    },
+    color: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [7]
+      }
+    },
   }, {});
   Category.associate = function (models) {
     Category.hasMany(models.Event, {
