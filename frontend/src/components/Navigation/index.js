@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import ProfileButton from './ProfileButton';
 
@@ -29,10 +29,10 @@ export default function Navigation({ isLoaded }) {
 
   return (
     <div className="navbar__container">
-      <Link className="navbar__logo" exact to='/'><img src="/images/'SupDog-Logo.png" width="150px" /></Link>
+      <Link className="navbar__logo" to='/'><img src="/images/'SupDog-Logo.png" alt='' width="150px" /></Link>
       <div className="navbar__right-container">
         <div className="navbar__search">
-          <i class="fas fa-search"></i>
+          <i className="fas fa-search"></i>
         </div>
         <div className="navbar__links">
           {isLoaded && sessionLinks}

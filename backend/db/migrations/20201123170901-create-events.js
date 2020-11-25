@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING(50),
         allowNull: false
       },
-      organizer: {
+      organizerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {

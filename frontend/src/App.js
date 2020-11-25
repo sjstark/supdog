@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     dispatch(restoreUser())
-      .then(() => loadMoreEvents(10))
+      .then(() => dispatch(loadMoreEvents(0, 10)))
       .then(() => setIsLoaded(true))
   }, [dispatch])
 

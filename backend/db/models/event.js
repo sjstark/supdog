@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         len: [4, 50]
       }
     },
-    organizer: {
+    organizerId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
@@ -32,13 +32,16 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Event.associate = function (models) {
     Event.belongsTo(models.User, {
-      foreignKey: 'organizer'
+      as: 'organizer',
+      foreignKey: 'organizerId',
     });
     Event.hasMany(models.Ticket, {
-      foreignKey: 'eventId'
+      foreignKey: 'eventId',
+      as: 'tickets'
     })
     Event.belongsTo(models.Category, {
-      foreignKey: 'categoryId'
+      foreignKey: 'categoryId',
+      as: 'category'
     })
 
   };

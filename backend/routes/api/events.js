@@ -5,7 +5,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const { requireAuth } = require('../../utils/auth');
-const { Event, User, Ticket } = require('../../db/models');
+const { Event, User, Ticket, Sequelize } = require('../../db/models');
 
 const ticketsRouter = require('./tickets')
 
@@ -85,7 +85,8 @@ router.get(
 
     const events = await Event.findAll({
       offset: start,
-      limit: amount
+      limit: amount,
+      include: ['organizer', 'tickets', 'category']
     })
 
     return res.json({ events })
