@@ -50,12 +50,12 @@
   align-items: center;
   justify-content: center;
 
-  transition: all .5s ease-in-out;
+  transition: all .4s ease-in-out;
 }
 
 .event-card__wrapper:hover .event-card__foreground-details {
   opacity: 0;
-  transition: all .3s;
+  transition: all .1s;
 }
 
 .event-card__picture {
@@ -100,7 +100,7 @@
   opacity: 1;
   width:250px;
   height: 400px;
-  transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out .075s;
 
 }
 

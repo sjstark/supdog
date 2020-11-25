@@ -7,15 +7,6 @@ const awsUtils = require('../utils/awsS3')
 
 router.use("/api", apiRouter);
 
-// router.get("/hello/world", function (req, res) {
-//   res.cookie("XSRF-TOKEN", req.csrfToken());
-//   res.send("Hello World!");
-// });
-
-router.get('/aws-test', (req,res) => {
-  res.send(`<img src="https://supdog-hosting.s3.us-east-2.amazonaws.com/test-bars.gif" alt="AWS Picture" />`)
-})
-
 // Static routes
 // Serve React build files in production
 if (process.env.NODE_ENV === "production") {
@@ -41,7 +32,7 @@ if (process.env.NODE_ENV === "production") {
 } else if (process.env.NODE_ENV !== 'production') {
   router.get('/api/csrf/restore', (req, res) => {
     res.cookie('XSRF-TOKEN', req.csrfToken());
-    return res.json({})
+    return res.status(201).json({})
   })
 }
 
