@@ -77,10 +77,12 @@ export default function SignupForm() {
 
   return (
     <form className='signup-form'>
-      <h2>Sign Up for 'SupDog</h2>
-      <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul>
+      <h2>Sign Up for <span style={{ fontFamily: "'Pacifico', cursive" }}>'SupDog</span></h2>
+      {errors.length > 0 && (
+        <ul>
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>
+      )}
       <div className="signup-form__inputs-container">
         <div className="signup-form__input-fields">
           <FormInput name='First Name' required={true} type="text" value={firstName} onChange={({ target }) => setFirstName(target.value)} />

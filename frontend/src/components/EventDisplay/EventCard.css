@@ -1,0 +1,122 @@
+.event-card__wrapper {
+  position: relative;
+
+  box-sizing: border-box;
+
+  width: 250px;
+  height: 300px;
+
+  border:1px dashed lime;
+
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.event-card__foreground {
+  position: absolute;
+
+  align-self: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.event-card__picture-wrapper {
+  overflow: hidden;
+  width: 175px;
+  height: 250px;
+
+  border-radius: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all .5s ease-in-out;
+}
+
+
+.event-card__wrapper:hover .event-card__picture-wrapper {
+  overflow: hidden;
+  width: 125px;
+  height: 178px;
+
+  border-radius: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all .5s ease-in-out;
+}
+
+.event-card__wrapper:hover .event-card__foreground-details {
+  opacity: 0;
+  transition: all .3s;
+}
+
+.event-card__picture {
+  height: 100%;
+}
+
+
+/*
+ * ─── BACKGROUND ─────────────────────────────────────────────────────────────────
+ */
+
+
+.event-card__background {
+
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
+
+  overflow: hidden;
+
+  width:0;
+  height: 0;
+
+  top: 40px;
+  align-self: center;
+
+  background-color: white;
+
+  border-radius: 20px;
+
+  box-shadow: 0 0 10px rgba(0,0,0,.3);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  transition: all .5s ease-in-out;
+
+}
+
+.event-card__wrapper:hover .event-card__background {
+  opacity: 1;
+  width:250px;
+  height: 400px;
+  transition: all .5s ease-in-out;
+
+}
+
+
+.event-card__background-image {
+  filter: blur(8px);
+  width: 100%;
+}
+
+.event-card__background-details {
+  justify-self: flex-end;
+
+  height:200px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}

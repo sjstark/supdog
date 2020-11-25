@@ -30,3 +30,18 @@
 .button--primary:hover {
   background-color: rgb(42, 103, 208);
 }
+
+.main-wrapper {
+  display: grid;
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 80px 1fr;
+}
+
+.main-content-wrapper {
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

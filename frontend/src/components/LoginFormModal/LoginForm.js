@@ -26,10 +26,12 @@ export default function LoginForm() {
 
   return (
     <form className='login-form'>
-      <h2>Login to 'SupDog</h2>
-      <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul>
+      <h2>Login to <span style={{ fontFamily: "'Pacifico', cursive" }}>'SupDog</span></h2>
+      {errors.length > 0 && (
+        <ul>
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>
+      )}
       <div className="login-form__input-fields">
         <FormInput name='Email or Username' required={true} type="text" value={credential} onChange={({ target }) => setCredential(target.value)} />
         <FormInput name='Password' required={true} type="password" value={password} onChange={({ target }) => setPassword(target.value)} />

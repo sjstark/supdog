@@ -42,17 +42,18 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       <CategoryBar isLoaded={isLoaded} />
 
+      <div className="main-content-wrapper">
+        {isLoaded && (
 
-      {isLoaded && (
-        <>
           <Switch>
 
-            {/* <Route path="/new-event"> <NewEventForm /> </Route> */}
-            {/* <Route path='/image-test'> <ImageUpload aspect={1} /> </Route> */}
-            {/* <Route exact path="/" component={EventDisplay} /> */}
+            <Route path="/new-event"> <NewEventForm /> </Route>
+            <Route path='/image-test'> <ImageUpload aspect={1} /> </Route>
+            <Route path="/" render={() => <EventDisplay />} />
           </Switch>
-        </>
-      )}
+
+        )}
+      </div>
     </div>
   );
 }
