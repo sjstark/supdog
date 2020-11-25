@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session'
 
 import FormInput from '../FormInput'
@@ -31,7 +31,7 @@ export default function LoginForm() {
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
       <div className="login-form__input-fields">
-        <FormInput name='Email' required={true} type="text" value={credential} onChange={({ target }) => setCredential(target.value)} />
+        <FormInput name='Email or Username' required={true} type="text" value={credential} onChange={({ target }) => setCredential(target.value)} />
         <FormInput name='Password' required={true} type="password" value={password} onChange={({ target }) => setPassword(target.value)} />
       </div>
       <div className="button button--primary" onClick={handleSubmit}>Log In</div>

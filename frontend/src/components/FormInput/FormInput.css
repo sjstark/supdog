@@ -29,11 +29,15 @@
 .form-input__input{
   position: absolute;
 
+  width: 85%;
+
   border: none !important;
 
   font-size: 1.1em;
 
   outline: none;
+
+  text-overflow: ellipsis;
 }
 
 .form-input__container--focused {

@@ -3,4 +3,11 @@
   height: 400px;
   width: 400px;
   overflow: hidden;
+
 }
+
+/* .image-cropper__container {
+  border-radius: 20px;
+  border: 1px solid red;
+  overflow: hidden;
+} */

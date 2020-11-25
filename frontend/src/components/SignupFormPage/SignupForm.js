@@ -4,6 +4,7 @@ import compress from 'compress.js'
 
 import * as sessionActions from '../../store/session'
 import { Redirect } from 'react-router-dom'
+import FormInput from '../FormInput'
 import ImageInput from '../ImageCropper/ImageInput'
 
 import './SignupForm.css'
@@ -74,80 +75,28 @@ export default function SignupForm() {
 
   }
 
-  // const updateFile = async (e) => {
-
-  //   const { target:
-  //     {
-  //       validity,
-  //       files: [file]
-  //     }
-  //   } = e;
-
-
-  //   if (file) {
-  //     let reader = new FileReader();
-  //     reader.onload = (e) => {
-  //       setProfilePicPreview(e.target.result)
-  //     }
-  //     reader.readAsDataURL(file)
-  //   }
-
-  //   return validity.valid && setProfilePic(file);
-  // }
-
-
   return (
-    <form onSubmit={handleSubmit} className='signup-form'>
+    <form className='signup-form'>
+      <h2>Sign Up for 'SupDog</h2>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-      <div>
-        <label>
-          First Name:
-          <input required type="text" value={firstName} onChange={({ target }) => setFirstName(target.value)} />
-        </label>
+      <div className="signup-form__inputs-container">
+        <div className="signup-form__input-fields">
+          <FormInput name='First Name' required={true} type="text" value={firstName} onChange={({ target }) => setFirstName(target.value)} />
+          <FormInput name='Last Name' required={true} type="text" value={lastName} onChange={({ target }) => setLastName(target.value)} />
+          <FormInput name='Email' required={true} type="text" value={email} onChange={({ target }) => setEmail(target.value)} />
+          <FormInput name='Username' required={true} type="text" value={username} onChange={({ target }) => setUsername(target.value)} />
+          <FormInput name='Password' required={true} type="password" value={password} onChange={({ target }) => setPassword(target.value)} />
+          <FormInput name='Confirm Password' required={true} type="password" value={confirmPassword} onChange={({ target }) => setConfirmPassword(target.value)} />
+        </div>
+        <div className="signup-form__profile-pic">
+          <h2>Select a Profile Picture</h2>
+          <span>After selection image, drag to position and scroll to zoom.</span>
+          <ImageInput aspect={1} onChange={setProfilePic} />
+        </div>
       </div>
-      <div>
-        <label>
-          Last Name:
-          <input required type="text" value={lastName} onChange={({ target }) => setLastName(target.value)} />
-        </label>
-      </div>
-      <div>
-        <label>
-          Email:
-          <input required type="text" value={email} onChange={({ target }) => setEmail(target.value)} />
-        </label>
-      </div>
-      <div>
-        <label>
-          Username:
-          <input required type="text" value={username} onChange={({ target }) => setUsername(target.value)} />
-        </label>
-      </div>
-      <div>
-        <label>
-          Password:
-          <input required type="password" value={password} onChange={({ target }) => setPassword(target.value)} />
-        </label>
-      </div>
-      <div>
-        <label>
-          Confirm Password:
-          <input required type="password" value={confirmPassword} onChange={({ target }) => setConfirmPassword(target.value)} />
-        </label>
-      </div>
-      <div>
-        <ImageInput aspect={1} onChange={setProfilePic} />
-        {/* <label>
-          Profile Picture:
-          <input id='profile-pic-upload' type="file" onChange={updateFile} />
-        </label>
-        {profilePicPreview && (<img width="100px" id="profile-pic-preview" src={profilePicPreview} alt="Loading Profile Pic..." />)} */}
-      </div>
-      {<button type="submit">Sign Up</button>}
-      {/* {!sending && <button type="submit">Sign Up</button>} */}
-      {/* {sending && <button disabled={true}>Sign Up</button>} */}
+      {<div className="button button--primary" onClick={handleSubmit}>Sign Up</div>}
     </form>
   )
 }

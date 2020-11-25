@@ -34,17 +34,19 @@ const ImageInput = ({ aspect, onChange, width, height }) => {
         accept='image/*'
         onChange={onInputChange}
       />
-      {
-        (
-          <ImageCropper
-            getBlob={getBlob}
-            inputImg={inputImg}
-            aspect={aspect}
-            width={width}
-            height={height}
-          />
-        )
-      }
+      <div className="image-cropper__container">
+        {
+          (
+            <ImageCropper
+              getBlob={getBlob}
+              inputImg={inputImg}
+              aspect={aspect}
+              width={width}
+              height={height}
+            />
+          )
+        }
+      </div>
     </>
   )
 }

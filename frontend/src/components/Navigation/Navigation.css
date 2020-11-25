@@ -163,11 +163,14 @@
 }
 
 .navbar__profile-icon {
+  box-sizing: border-box;
   z-index: 21;
   position: absolute;
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  border: 2px solid white;
+
   right: 0;
 }
 
