@@ -13,6 +13,7 @@ import { restoreCSRF, fetch } from './store/csrf'
 
 import configureStore from './store';
 
+import * as eventActions from './store/event'
 import * as sessionActions from './store/session'
 
 const store = configureStore();
@@ -22,6 +23,7 @@ if (process.env.NODE_ENV !== "production") {
 
   window.csrfFetch = fetch;
   window.store = store
+  window.eventActions = eventActions
   window.sessionActions = sessionActions
 }
 

@@ -4,8 +4,8 @@ import { fetch } from './csrf'
 
 const ADD_EVENTS = 'events/addEvents'
 const SET_EVENTS = 'events/setEvents'
-const GET_X_EVENTS = 'events/getXEvents'
-const GET_ALL_EVENTS = 'events/getALLEvents'
+// const GET_N_EVENTS = 'events/getNEvents'
+// const GET_ALL_EVENTS = 'events/getALLEvents'
 const CLEAR_EVENTS = 'events/clearEvents'
 
 //events is an array
@@ -24,30 +24,30 @@ const clearEvents = () => ({
   type: CLEAR_EVENTS
 })
 
-const getXEvents = (start = 0, amount = 10) => ({
-  type: GET_X_EVENTS,
-  payload: {
-    start,
-    amount
-  }
-})
+// const getNEvents = (start = 0, amount = 10) => ({
+//   type: GET_N_EVENTS,
+//   payload: {
+//     start,
+//     amount
+//   }
+// })
 
-const getAllEvents = () => ({
-  type: GET_ALL_EVENTS,
-})
+// const getAllEvents = () => ({
+//   type: GET_ALL_EVENTS,
+// })
 
-export const getCurrentEvents = (start, amount) => {
-  return dispatch => {
-    return dispatch(getXEvents(start, amount))
-  }
-}
+// export const getCurrentEvents = () => {
+//   return dispatch => {
+//     return dispatch(getAllEvents())
+//   }
+// }
 
 export const loadMoreEvents = (start, amount) => {
   return async dispatch => {
+
     const res = await fetch(`/api/events?start=${start}&amount=${amount}`)
 
-    return dispatch(addEvents(res.data))
-    return dispatch(getAllEvents())
+    return dispatch(addEvents(res.data.events))
   }
 }
 
@@ -85,11 +85,11 @@ const initialState = {
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case GET_X_EVENTS:
-      return state.events.slice(payload.start, payload.start + payload.amount)
+    // case GET_N_EVENTS:
+    //   return state.events.slice(payload.start, payload.start + payload.amount)
 
-    case GET_ALL_EVENTS:
-      return state.events
+    // case GET_ALL_EVENTS:
+    //   return state.events
 
     case SET_EVENTS:
       return { ...payload }

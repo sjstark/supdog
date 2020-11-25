@@ -9,6 +9,7 @@ import CategoryBar from './components/CategoryBar';
 import ImageUpload from './components/ImageCropper/ImageInput'
 
 import { restoreUser } from './store/session';
+import { loadMoreEvents } from './store/event';
 
 function App() {
   const dispatch = useDispatch()
@@ -17,9 +18,10 @@ function App() {
 
   const [isLoaded, setIsLoaded] = useState(false)
 
-
   useEffect(() => {
-    dispatch(restoreUser()).then(() => setIsLoaded(true))
+    dispatch(restoreUser())
+      .then(() => loadMoreEvents(10))
+      .then(() => setIsLoaded(true))
   }, [dispatch])
 
 

@@ -81,7 +81,12 @@ router.post(
 router.get(
   '',
   asyncHandler(async (req, res) => {
-    const events = await Event.findAll()
+    const { start, amount } = req.query
+
+    const events = await Event.findAll({
+      offset: start,
+      limit: amount
+    })
 
     return res.json({ events })
   })
