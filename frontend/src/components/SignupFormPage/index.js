@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
-import {Modal} from '../../context/Modal'
+import { Modal } from '../../context/Modal'
 import SignupForm from './SignupForm'
 
 export default function SignupFormModal() {
@@ -8,9 +8,9 @@ export default function SignupFormModal() {
 
   return (
     <>
-      <button onClick={() => {
-          setShowModal(true)
-        }}>Sign Up</button>
+      <div className="navbar__button navbar__button--primary" onClick={() => {
+        setShowModal(true)
+      }}>Sign Up</div>
       {showModal && (
         <>
           <Modal onClose={() => setShowModal(false)}>

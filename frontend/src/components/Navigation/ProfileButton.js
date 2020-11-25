@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { Link } from 'react-router-dom'
+
 import { logout } from '../../store/session'
 
 
@@ -40,17 +42,26 @@ export default function ProfileButton() {
 
   return (
     <>
-      <button onClick={openMenu} className="profileIcon">
-        {sessionUser.profilePicURL && (<img src={sessionUser.profilePicURL} alt="" style={{ width: '30px', height: '30px' }} />)}
-        {!sessionUser.profilePicURL && <FontAwesomeIcon icon={faUserCircle} className="navBar__profile-icon" />}
-      </button>
-      {showMenu && (
-        <div className="navbar__profile-dropdown">
-          <div>{sessionUser.username}</div>
-          <div>{sessionUser.email}</div>
-          <button onClick={handleLogout}>Log Out</button>
+      <div onClick={openMenu} className="navbar__user-container">
+        <div className="navbar__user-container-dropdown">
+          <i class="fas fa-caret-down"></i>
         </div>
-      )}
+        {sessionUser.profilePicURL && (<img className="navbar__profile-icon" src={sessionUser.profilePicURL} alt="" />)}
+        {!sessionUser.profilePicURL && <FontAwesomeIcon icon={faUserCircle} className="navbar__profile-icon" />}
+
+        <div className={`navbar__profile-dropdown ${showMenu ? "navbar__profile-dropdown--shown" : "navbar__profile-dropdown--hidden"}`}>
+          <div className="navbar__dropdown-user-info">
+            <div className="navbar__dropdown-text">{sessionUser.username}</div>
+            <div className="navbar__dropdown-text">{sessionUser.email}</div>
+          </div>
+          <div className="navbar__dropdown-links">
+            <Link className='navbar__dropdown-link' to="/new-event">Create A New Event</Link>
+            <Link className='navbar__dropdown-link' to="/">My Events</Link>
+            <Link className='navbar__dropdown-link' to="/">My Tickets</Link>
+            <div className='navbar__dropdown-link' onClick={handleLogout}>Log Out</div>
+          </div>
+        </div>
+      </div>
     </>
   )
 }

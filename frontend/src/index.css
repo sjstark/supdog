@@ -1,4 +1,32 @@
-/* TODO Add site wide styles */
-.active {
-  font-weight: bold;
+.button {
+  display: block;
+  width: 100px;
+  height: 40px;
+
+  border-radius: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: rgb(50, 123, 248);
+
+  cursor: pointer;
+
+  transition: all .1s;
+}
+
+.button:hover {
+  background-color: whitesmoke;
+  box-shadow: 1px 2px 4px rgba(0,0,0,.3);
+
+}
+
+.button--primary {
+  color: whitesmoke;
+  background-color: rgb(50, 123, 248);
+}
+
+.button--primary:hover {
+  background-color: rgb(42, 103, 208);
 }

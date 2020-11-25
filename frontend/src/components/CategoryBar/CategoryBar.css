@@ -1,6 +1,7 @@
 .category-bar {
+  z-index: 5;
 
-  transform: translateX(-8px);
+  transform: translatey(60px);
 
   height: 100vh;
 

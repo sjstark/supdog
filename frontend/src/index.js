@@ -1,11 +1,12 @@
 import React from 'react';
 
+import './reset.css';
 import './index.css';
 
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import {ModalProvider} from './context/Modal'
+import { ModalProvider } from './context/Modal'
 import App from './App';
 
 import { restoreCSRF, fetch } from './store/csrf'

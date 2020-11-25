@@ -1,16 +1,24 @@
 .login-form {
   margin: auto;
-  border: 1px solid rgba(0,0,0,.3);
-  border-radius: 10px;
   padding: 20px;
+
+  width: 500px;
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.login-form__input-fields {
+  display: flex;
+  flex-direction: column;
 }
 
 .login-form li {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: red;
-}
-
-.login-form label {
-  cursor: pointer;
 }
 
 .login-form button {

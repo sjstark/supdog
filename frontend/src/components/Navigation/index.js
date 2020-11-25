@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import ProfileButton from './ProfileButton';
 
@@ -16,10 +16,7 @@ export default function Navigation({ isLoaded }) {
 
   if (sessionUser) {
     sessionLinks = (
-      <>
-        <NavLink exact to="/new-event">Create A New Event</NavLink>
-        <ProfileButton />
-      </>
+      <ProfileButton />
     )
   } else {
     sessionLinks = (
@@ -31,9 +28,16 @@ export default function Navigation({ isLoaded }) {
   }
 
   return (
-    <ul>
-      <NavLink exact to='/'>Home</NavLink>
-      {isLoaded && sessionLinks}
-    </ul>
+    <div className="navbar__container">
+      <Link className="navbar__logo" exact to='/'><img src="/images/'SupDog-Logo.png" width="150px" /></Link>
+      <div className="navbar__right-container">
+        <div className="navbar__search">
+          <i class="fas fa-search"></i>
+        </div>
+        <div className="navbar__links">
+          {isLoaded && sessionLinks}
+        </div>
+      </div>
+    </div>
   )
 }

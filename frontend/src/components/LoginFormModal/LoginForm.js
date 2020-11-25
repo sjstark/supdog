@@ -1,6 +1,8 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session'
+
+import FormInput from '../FormInput'
 
 import './LoginForm.css'
 
@@ -14,7 +16,7 @@ export default function LoginForm() {
     e.preventDefault();
     setErrors([]);
 
-    return dispatch(sessionActions.login({credential, password}))
+    return dispatch(sessionActions.login({ credential, password }))
       .catch((res) => {
         if (res.data && res.data.errors) {
           setErrors(res.data.errors)
@@ -23,23 +25,16 @@ export default function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className='login-form'>
+    <form className='login-form'>
+      <h2>Login to 'SupDog</h2>
       <ul>
         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
       </ul>
-      <div>
-        <label>
-          Email or Username:
-          <input required type="text" value={credential} onChange={({target}) => setCredential(target.value)}/>
-        </label>
+      <div className="login-form__input-fields">
+        <FormInput name='Email' required={true} type="text" value={credential} onChange={({ target }) => setCredential(target.value)} />
+        <FormInput name='Password' required={true} type="password" value={password} onChange={({ target }) => setPassword(target.value)} />
       </div>
-      <div>
-        <label>
-          Password:
-          <input required type="password" value={password} onChange={({target}) => setPassword(target.value)} />
-        </label>
-      </div>
-      <button type="submit">Log In</button>
+      <div className="button button--primary" onClick={handleSubmit}>Log In</div>
     </form>
   )
 }
