@@ -1,0 +1,7 @@
+.event-display-list{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin: 20px;
+  justify-content: space-between
+}

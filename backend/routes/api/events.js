@@ -93,4 +93,15 @@ router.get(
   })
 )
 
+router.get(
+  '/:id(\\d+)',
+  asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.id, 10)
+    const event = await Event.findByPk(id, {
+      include: ['organizer', 'tickets', 'category']
+    })
+    res.json(event)
+  })
+)
+
 module.exports = router

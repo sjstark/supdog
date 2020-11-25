@@ -1,25 +1,21 @@
-import React, { useState, useEffect } from 'react'
-import { connect, useDispatch } from 'react-redux'
-import { fetch } from '../../store/csrf'
+import React from 'react'
+import { connect } from 'react-redux'
 
 import EventCard from '../EventCard'
 
+import './EventDisplay.css'
+
 function EventDisplay({ events }) {
-
-  // useEffect(async () => {
-  //   const response = await (fetch('/api/events'))
-  //   const eventsJSON = response.data.events
-  //   // setEvents(eventsJSON)
-  // }, [])
-
   return (
-    <ul>
-      {events && events.slice(0, 1).map((event) => {
+    <ul className="event-display-list">
+      {events && events
+        // .slice(0, 1)
+        .map((event) => {
 
-        return (
-          <EventCard key={`event-${event.id}`} event={event} />
-        )
-      })}
+          return (
+            <EventCard key={`event-${event.id}`} event={event} />
+          )
+        })}
     </ul>
   )
 }

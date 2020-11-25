@@ -2,11 +2,11 @@
   position: relative;
 
   box-sizing: border-box;
+  margin: auto;
+
 
   width: 250px;
-  height: 300px;
-
-  border:1px dashed lime;
+  height: 440px;
 
   cursor: pointer;
 
@@ -62,6 +62,59 @@
   height: 100%;
 }
 
+.event-card__organizer-pic {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid black;
+}
+
+.event-card__foreground-details-title {
+  height: 2rem;
+  margin-top: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+
+.event-card__foreground-details-organizer {
+  font-size: 14px;
+  margin: 10px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.event-card__foreground-details-organizer > div {
+  display: flex;
+  align-items: center;
+}
+
+.event-card__foreground-details-organizer span{
+  font-size: 12px;
+  margin-left: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.event-card__foreground-details-ticket-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.fa-ticket-alt {
+  transform: rotate(-45deg);
+  margin-right: 10px;
+}
+
+.event-card__foreground-details-ticket-count span {
+  margin: 0 5px;
+  font-size: 16px;
+}
 
 /*
  * ─── BACKGROUND ─────────────────────────────────────────────────────────────────
@@ -101,9 +154,15 @@
   width:250px;
   height: 400px;
   transition: all .5s ease-in-out .075s;
-
 }
 
+.event-card__background:hover {
+  opacity: 1;
+  width:250px;
+  height: 400px;
+  transition: all .5s ease-in-out .075s;
+
+}
 
 .event-card__background-image {
   filter: blur(8px);
@@ -119,4 +178,41 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+}
+
+.event-card__background-title {
+  font-size: 20px;
+  text-align: center;
+}
+
+.event-card__background-summary{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.event-card__background-tickets {
+  width: 100%;
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+.event-card__background-tickets span {
+  font-weight: bold;
+}
+
+.event-card__background-ticket-item {
+  margin: 5px 0;
+  padding-left: 10px;
+}
+
+.event-card__background-tickets * {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.event-card__background .button {
+  justify-self: flex-end;
+  margin: 10px;
+}
+
+div.event-card__background div.button:hover {
+  box-shadow: 1px 2px 4px rgba(0,0,0,.3);
 }

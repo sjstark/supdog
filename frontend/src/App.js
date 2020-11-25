@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 
 import Navigation from './components/Navigation';
 import EventDisplay from './components/EventDisplay';
+import EventDetails from './components/EventDetails';
 import NewEventForm from './components/NewEventForm';
 import CategoryBar from './components/CategoryBar';
 import ImageUpload from './components/ImageCropper/ImageInput'
@@ -48,7 +49,7 @@ function App() {
         {isLoaded && (
 
           <Switch>
-
+            <Route path="/events/:id"> <EventDetails /></Route>
             <Route path="/new-event"> <NewEventForm /> </Route>
             <Route path='/image-test'> <ImageUpload aspect={1} /> </Route>
             <Route path="/" render={() => <EventDisplay />} />
