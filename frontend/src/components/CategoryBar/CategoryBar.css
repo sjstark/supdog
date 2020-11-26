@@ -1,5 +1,5 @@
 .category-bar {
-  z-index: 5;
+  z-index: 10;
 
   transform: translatey(60px);
 

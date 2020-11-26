@@ -5,6 +5,7 @@ import { clearEvents, loadMoreEvents } from '../../store/event'
 import { fetch } from '../../store/csrf'
 
 import EventCard from '../EventCard'
+import Footer from '../Footer'
 
 import './EventDisplay.css'
 
@@ -53,7 +54,7 @@ function EventDisplay({ events, view, isLoading }) {
         {isLoaded && (
           <>
             {events.length === 0 && (
-              <div> There are no events for this yet!</div>
+              <div style={{ height: '50vh' }}> There are no events for this yet!</div>
             )}
             {events && events
               // .slice(0, 1)
@@ -74,6 +75,7 @@ function EventDisplay({ events, view, isLoading }) {
           </div>
         </div>
       )}
+      <Footer />
     </div>
   )
 }

@@ -4,6 +4,7 @@
   box-sizing: border-box;
   margin: auto;
 
+  z-index: 5;
 
   width: 250px;
   height: 440px;
