@@ -103,6 +103,8 @@
   align-items: center;
   justify-content: center;
 
+  box-shadow: 0 0 20px rgba(0,0,0,.6);
+
   transition: all .4s ease-in-out;
 }
 
