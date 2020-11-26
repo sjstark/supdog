@@ -27,7 +27,7 @@ module.exports = {
   down: (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete('Events', {
-      organizerId: { [Op.in]: [0, 1, 2] }
+      organizerId: { [Op.in]: [1, 2, 3] }
     })
   }
 };

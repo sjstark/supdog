@@ -39,8 +39,9 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
+
     return queryInterface.bulkDelete('Users', {
-      username: { [Op.in]: ['Demo-lition', ...fakeUsers.map(user => { user.username })] }
+      username: { [Op.in]: ['Demo-lition', ...fakeUsers.map(user => user.username)] }
     }, {});
   }
 };
