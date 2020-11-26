@@ -6,6 +6,7 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const { requireAuth } = require('../../utils/auth');
 const { Event, User, Ticket, Sequelize } = require('../../db/models');
+const { Op } = Sequelize
 
 const ticketsRouter = require('./tickets')
 
@@ -101,6 +102,29 @@ router.get(
       include: ['organizer', 'tickets', 'category']
     })
     res.json(event)
+  })
+)
+
+router.get(
+  '/search',
+  asyncHandler(async (req, res) => {
+    const searchParam = decodeURI(req.query.search)
+
+    const events = await Event.findAll({
+      where: {
+        title: {
+          [Op.iLike]: `%${searchParam}%`
+        }
+      },
+      include: ['organizer', 'tickets', 'category']
+
+    })
+
+    // console.log('\n\n\n\n')
+    // console.log(searchParam)
+    // console.log(events)
+    // console.log('\n\n\n\n')
+    res.json({ events })
   })
 )
 

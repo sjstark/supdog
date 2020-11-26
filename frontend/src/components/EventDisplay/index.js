@@ -15,6 +15,7 @@ function EventDisplay({ events, view, isLoading }) {
   const [viewName, setViewName] = useState('All Events')
 
   const changeViewName = async (view) => {
+
     if (view === null) {
       return setViewName('All Events')
     }

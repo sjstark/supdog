@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import ProfileButton from './ProfileButton';
+import SearchButton from './SearchButton';
 
 import LoginFormModal from '../LoginFormModal'
 import SignupFormModal from '../SignupFormPage';
@@ -51,9 +52,7 @@ export default function Navigation({ isLoaded }) {
     <div className="navbar__container">
       <div className="navbar__logo" onClick={logoClick}><img src="/images/'SupDog-Logo.png" alt='' width="150px" /></div>
       <div className="navbar__right-container">
-        <div className="navbar__search">
-          <i className="fas fa-search"></i>
-        </div>
+        <SearchButton />
         <div className="navbar__links">
           {isLoaded && sessionLinks}
         </div>

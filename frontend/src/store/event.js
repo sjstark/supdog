@@ -62,8 +62,9 @@ export const loadMoreEvents = (start, amount, view) => {
       res = await fetch(`/api/events?start=${start}&amount=${amount}`)
     }
 
+    let { events } = res.data
 
-    if (res.data.events && res.data.events.length >= 1) return dispatch(addEvents(res.data.events))
+    if (events && events.length >= 1) return dispatch(addEvents(events))
   }
 }
 
