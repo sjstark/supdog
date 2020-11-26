@@ -37,9 +37,11 @@ export default function EventDetails() {
                 <img className="event-details__header-image" src={event.eventPicURL} alt="" />
               </div>
               <div className="event-details__header-right">
-                <h1 className="event-detail__header-date"></h1>
+                {/* <h1 className="event-detail__header-date"></h1> */}
                 <h1 className="event-detail__header-title">{event.title}</h1>
-                <h1 className="event-detail__header-organizer">by {event.organizer.username}</h1>
+                <h1 className="event-detail__header-organizer">{'by '}
+                  <img className="event-detail__header-organizer-pic" src={event.organizer.profilePicURL} alt="" />
+                  {event.organizer.username}</h1>
               </div>
             </div>
             <div className="event-details__body">
@@ -49,10 +51,12 @@ export default function EventDetails() {
                 <p>{event.about}</p>
               </div>
               <div className="event-details__body-right">
-                Ticket
+                <h1 style={{ fontSize: "24px" }}>
+                  Tickets
+                </h1>
                 {event.tickets.map(ticket => {
-                return <TicketItem key={ticket.id} ticket={ticket} getEvent={getEvent} />
-              })}
+                  return <TicketItem key={ticket.id} ticket={ticket} getEvent={getEvent} />
+                })}
               </div>
             </div>
           </div>

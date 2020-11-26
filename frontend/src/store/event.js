@@ -64,7 +64,6 @@ export const loadMoreEvents = (start, amount, view) => {
 
 
     if (res.data.events && res.data.events.length >= 1) return dispatch(addEvents(res.data.events))
-    return dispatch(clearEvents())
   }
 }
 

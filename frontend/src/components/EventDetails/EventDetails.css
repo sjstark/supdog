@@ -9,6 +9,7 @@
 
 .event-details__background-container {
   z-index: -1;
+  width: 100%;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -55,14 +56,41 @@
 
 .event-details__header-image {
   width: 100%;
-  height: 100%;
+  height: 350px;
 }
 
 .event-details__header-right{
   grid-column: 2/3;
   background-color: white;
 
-  padding: 20px;
+  padding: 10px;
+
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.event-detail__header-title {
+  font-size: 28px;
+  text-align: center;
+  line-height: 1.5;
+
+}
+
+.event-detail__header-organizer {
+  display: flex;
+  align-items: center;
+}
+
+.event-detail__header-organizer-pic {
+  box-sizing: border-box;
+
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid black;
+  margin: 5px;
 }
 
 .event-details__body {

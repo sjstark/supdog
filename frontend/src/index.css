@@ -37,6 +37,14 @@
   font-size: 12px;
 }
 
+.button--large {
+  width: 200px;
+  height: 50px;
+  border-radius: 100px;
+  font-size: 18px;
+
+}
+
 .button--disabled {
   color: white;
   background-color: grey;

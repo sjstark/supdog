@@ -11,6 +11,23 @@ const { Event, User, Ticket, SoldTicket, Category } = require('../../db/models')
 const router = express.Router({ mergeParams: true });
 
 router.get(
+  '/:categoryId(\\d+)/count',
+  asyncHandler(async (req, res) => {
+    const categoryId = parseInt(req.params.categoryId, 10)
+    res.json(await Event.count({ where: { categoryId } }))
+  })
+)
+
+router.get(
+  '/:categoryId(\\d+)/title',
+  asyncHandler(async (req, res) => {
+    const categoryId = parseInt(req.params.categoryId, 10)
+    const category = await Category.findByPk(categoryId)
+    res.json(category.title)
+  })
+)
+
+router.get(
   '/:id(\\d+)',
   asyncHandler(async (req, res) => {
 
@@ -41,14 +58,6 @@ router.get(
     res.json(await Category.findAll({
       attributes: ['id', 'title', 'icon', 'color']
     }))
-  })
-)
-
-router.get(
-  '/:categoryId(\\d+)/count',
-  asyncHandler(async (req, res) => {
-    const categoryId = parseInt(req.params.categoryId, 10)
-    res.json(await Event.count({ where: { categoryId } }))
   })
 )
 

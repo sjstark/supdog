@@ -1,7 +1,42 @@
+.event-display-container {
+  width: 100%;
+}
+
+.event-display-title {
+  font-size: 30px;
+  margin: 40px;
+
+}
+
 .event-display-list{
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
-  margin: 20px;
+  margin: 40px;
   justify-content: space-between
+}
+
+.event-display__show-more-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.event-display__show-more-line {
+  position: absolute;
+  height: 2px;
+  width: 95%;
+  background-color: rgba(50, 123, 248,.3)
+}
+
+.event-display__show-more-button-wrapper {
+  position: absolute;
+  padding: 30px;
+  background-color: white
+}
+
+.event-display__show-more-wrapper .button {
+  z-index: 2;
+  position: relative;
 }
