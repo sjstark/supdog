@@ -56,8 +56,8 @@ export default function ProfileButton() {
           </div>
           <div className="navbar__dropdown-links">
             <Link className='navbar__dropdown-link' to="/new-event">Create A New Event</Link>
-            <Link className='navbar__dropdown-link' to="/">My Events</Link>
-            <Link className='navbar__dropdown-link' to="/">My Tickets</Link>
+            <Link className='navbar__dropdown-link' to="/my-events">My Events</Link>
+            <Link className='navbar__dropdown-link' to="/my-tickets">My Tickets</Link>
             <div className='navbar__dropdown-link' onClick={handleLogout}>Log Out</div>
           </div>
         </div>
