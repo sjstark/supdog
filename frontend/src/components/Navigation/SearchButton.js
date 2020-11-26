@@ -1,8 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 import { useDispatch } from 'react-redux'
 
 import { changeView } from '../../store/view'
+
+function SearchField({ searchValue, setSearchValue }) {
+  const searchRef = useRef(null)
+
+  useEffect(() => {
+    searchRef.current.focus()
+  }, [])
+
+  return (
+    <input ref={searchRef} type='text' placeholder="Search for event titles" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
+  )
+}
+
 
 export default function SearchButton() {
   const dispatch = useDispatch()
@@ -42,10 +55,10 @@ export default function SearchButton() {
   }, [showSearchBar])
 
   return (
-    <div onClick={openSearch} className="navbar__search">
+    <div onClick={openSearch} className={`navbar__search ${showSearchBar ? 'navbar__search--open' : 'navbar__search--closed'}`}>
       <i className="fas fa-search"></i>
       {showSearchBar && (
-        <input type='text' value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
+        <SearchField searchValue={searchValue} setSearchValue={setSearchValue} />
       )}
     </div>
   )

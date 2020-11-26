@@ -35,28 +35,61 @@
   border-left: 1px solid rgba(0,0,0,.1);
 }
 
+/*
+ * ─── SEARCH BAR FORMATTING ──────────────────────────────────────────────────────
+ */
+
+
 .navbar__search {
+  position: relative;
+
   display: flex;
   justify-content: center;
   align-items: center;
 
-  width: 40px;
   height: 40px;
 
   margin: 10px;
 
-  border-radius: 50%;
+  border-radius: 100px;
 
   cursor: pointer;
+
+  overflow: hidden;
+}
+
+.navbar__search--closed {
+  width: 40px;
+  box-shadow: 0 0 5px rgba(0,0,0,0);
+
+  transition: background-color .2s , all .3s;
+}
+
+.navbar__search--open {
+  width: 200px;
+  box-shadow: 0 0 5px rgba(0,0,0,.3);
+  transition: all .5s;
 }
 
 .navbar__search i {
+  margin: 10px;
   color: rgb(50, 123, 248);
 }
 
-.navbar__search:hover {
+.navbar__search--closed:hover {
   background-color: whitesmoke;
+  transition: background-color .2s;
 }
+
+.navbar__search input {
+  margin: 10px;
+  width: 100px;
+  outline: none;
+  border: none;
+
+  background: none;
+}
+
 
 .navbar__button {
   display: block;

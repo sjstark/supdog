@@ -68,15 +68,19 @@ function EventDisplay({ events, view, isLoading }) {
           </>
         )}
       </ul>
-      {events.length > 0 && (
-        <div className="event-display__show-more-wrapper">
-          <div className="event-display__show-more-line" />
-          <div className="event-display__show-more-button-wrapper">
-            <div onClick={getMoreEvents} className="button button--primary button--large">Load More Events</div>
-          </div>
-        </div>
+      {isLoaded && (
+        <>
+          {events.length > 0 && (
+            <div className="event-display__show-more-wrapper">
+              <div className="event-display__show-more-line" />
+              <div className="event-display__show-more-button-wrapper">
+                <div onClick={getMoreEvents} className="button button--primary button--large">Load More Events</div>
+              </div>
+            </div>
+          )}
+          <Footer />
+        </>
       )}
-      <Footer />
     </div>
   )
 }
