@@ -1,5 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import * as formatDate from 'date-format'
+
 import { useHistory } from 'react-router-dom'
+
+import { fetch } from '../../store/csrf'
 
 import './EventCard.css'
 
@@ -15,6 +19,8 @@ function TicketItem({ ticket }) {
 export default function EventCard({ event }) {
   const history = useHistory()
 
+  const [nextDate, setNextDate] = useState('')
+
   const { id, title, organizer, eventPicURL, summary, tickets } = event
 
   const [left, avail] = tickets.reduce((acc, ticket) => {
@@ -23,6 +29,20 @@ export default function EventCard({ event }) {
     return acc
   }, [0, 0])
 
+  useEffect(() => {
+    (async () => {
+      let res = await fetch(`/api/events/${event.id}/next-date`)
+      let date = formatDate.asString(
+        'MM/dd',
+        new Date(res.data)
+      )
+      // let res = await fetch(`/api/events/${event.id}/next-date`)
+
+      setNextDate(date)
+    })()
+
+  }, [event])
+
   const handleClick = (e) => {
     e.stopPropagation()
     history.push(`/events/${id}`)
@@ -30,6 +50,7 @@ export default function EventCard({ event }) {
 
   return (
     <div key={`event-${id}`} className="event-card__wrapper" onClick={handleClick}>
+      <div className="event-card__date-banner"><span>{nextDate}</span></div>
       <div className='event-card__foreground'>
         <div className="event-card__picture-wrapper">
           <img className="event-card__picture" src={eventPicURL} alt="" />

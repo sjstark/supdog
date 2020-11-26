@@ -15,6 +15,38 @@
   flex-direction: column;
 }
 
+.event-card__date-banner {
+  z-index: 12;
+  position: absolute;
+
+  background-color: rgba(0,0,0,.6);
+  color: white;
+
+  font-size: .9em;
+
+  width: 50px;
+  height: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding-right: 5px;
+
+  clip-path: polygon(0% 0%, 100% 0, 88% 50%, 100% 100%, 0% 100%);
+
+  top: 20px;
+  left: 37px;
+  transition: all .6s;
+}
+
+.event-card__wrapper:hover .event-card__date-banner {
+  top: 55px;
+  left: 0px;
+  transition: all .6s ease-out;
+
+}
+
 .event-card__foreground {
   position: absolute;
 
