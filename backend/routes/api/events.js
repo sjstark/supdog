@@ -5,7 +5,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const { requireAuth } = require('../../utils/auth');
-const { Event, User, Ticket, Sequelize } = require('../../db/models');
+const { Event, User, Ticket, EventDate, Sequelize } = require('../../db/models');
 const { Op } = Sequelize
 
 const ticketsRouter = require('./tickets')
@@ -59,6 +59,7 @@ router.post(
     } = req.body;
 
     const tickets = JSON.parse(req.body.tickets)
+    const eventDates = JSON.parse(req.body.eventDates)
     // tickets = [];
     // Object.keys(req.body).filter(key => key.startsWith('ticket')).forEach(ticketKey => {
     //   tickets.push(req.body[ticketKey])
@@ -73,6 +74,11 @@ router.post(
     tickets.forEach(async ticket => {
       let newTicket = { name: ticket.name, quantity: parseInt(ticket.quantity, 10), eventId: event.id }
       await Ticket.create(newTicket)
+    })
+
+    eventDates.forEach(async eventDate => {
+      let newDate = { eventId: event.id, start: new Date(eventDate.start), end: new Date(eventDate.end) };
+      await EventDate.create(newDate)
     })
 
     return res.json(event)
@@ -102,6 +108,22 @@ router.get(
       include: ['organizer', 'tickets', 'category', 'eventDates']
     })
     res.json(event)
+  })
+)
+
+router.get(
+  '/:id(\\d+)/next-date',
+  asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.id, 10)
+    const date = await EventDate.min('start', {
+      where: {
+        eventId: id,
+        start: {
+          [Op.gte]: Sequelize.fn('now')
+        }
+      }
+    })
+    res.json(date)
   })
 )
 
