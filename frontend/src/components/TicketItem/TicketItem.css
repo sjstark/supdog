@@ -1,0 +1,23 @@
+.ticket-item__wrapper {
+  margin: 15px 0;
+}
+
+.ticket-item__name {
+  margin-bottom: 5px;
+}
+
+.ticket-item__tickets-left  {
+  font-size: 10px;
+}
+
+.success {
+  opacity: 0;
+  color: green;
+  transition: opacity 1s .5s;
+}
+
+.success.shown {
+  opacity: 1;
+  color: green;
+  transition: opacity .1s;
+}

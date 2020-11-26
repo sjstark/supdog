@@ -7,7 +7,6 @@ import EventDisplay from './components/EventDisplay';
 import EventDetails from './components/EventDetails';
 import NewEventForm from './components/NewEventForm';
 import CategoryBar from './components/CategoryBar';
-import ImageUpload from './components/ImageCropper/ImageInput'
 
 import { restoreUser } from './store/session';
 import { loadMoreEvents } from './store/event';

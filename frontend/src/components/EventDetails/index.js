@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { fetch } from '../../store/csrf'
+import TicketItem from '../TicketItem'
 
 import './EventDetails.css'
 
@@ -10,12 +11,16 @@ export default function EventDetails() {
   let { id } = useParams()
   const [event, setEvent] = useState(null)
 
+  const getEvent = async () => {
+    const res = await fetch(`/api/events/${id}`)
+    setEvent(res.data)
+  }
+
+
   useEffect(() => {
-    (async () => {
-      const res = await fetch(`/api/events/${id}`)
-      setEvent(res.data)
-    })()
+    getEvent()
   }, [id])
+
 
   return (
     <>
@@ -39,11 +44,15 @@ export default function EventDetails() {
             </div>
             <div className="event-details__body">
               <div className="event-details__body-left">
-                <p>{event.summary}</p>
+                <span >{event.summary}</span>
+                <h3>About this Event</h3>
                 <p>{event.about}</p>
               </div>
-              <div className="event-details__bady-right">
-                <div>TICKETS</div>
+              <div className="event-details__body-right">
+                Ticket
+                {event.tickets.map(ticket => {
+                return <TicketItem key={ticket.id} ticket={ticket} getEvent={getEvent} />
+              })}
               </div>
             </div>
           </div>

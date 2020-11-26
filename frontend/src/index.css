@@ -31,6 +31,25 @@
   background-color: rgb(42, 103, 208);
 }
 
+.button--small {
+  width: 80px;
+  height: 30px;
+  font-size: 12px;
+}
+
+.button--disabled {
+  color: white;
+  background-color: grey;
+  cursor: default;
+}
+
+.button--disabled:hover {
+  color: white;
+  background-color: grey;
+  box-shadow: none;
+}
+
+
 .main-wrapper {
   display: grid;
   grid-template-rows: 60px 1fr;
