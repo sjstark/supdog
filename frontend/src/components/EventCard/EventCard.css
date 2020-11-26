@@ -91,13 +91,14 @@
   transition: all .5s ease-in-out;
 }
 
-
 .event-card__wrapper:hover .event-card__picture-wrapper {
   overflow: hidden;
   width: 125px;
   height: 178px;
 
   border-radius: 15px;
+
+  background-color: white;
 
   display: flex;
   align-items: center;
@@ -223,6 +224,7 @@
 .event-card__background-image {
   filter: blur(8px);
   width: 100%;
+  min-height: 125px;
 }
 
 .event-card__background-details {

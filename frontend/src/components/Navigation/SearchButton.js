@@ -4,15 +4,22 @@ import { useDispatch } from 'react-redux'
 
 import { changeView } from '../../store/view'
 
-function SearchField({ searchValue, setSearchValue }) {
+function SearchField({ searchValue, setSearchValue, closeSearch }) {
   const searchRef = useRef(null)
 
   useEffect(() => {
     searchRef.current.focus()
   }, [])
 
+  const checkEnter = (e) => {
+    e.stopPropagation()
+
+    if (e.key !== 'Enter') return
+    closeSearch()
+  }
+
   return (
-    <input ref={searchRef} type='text' placeholder="Search for event titles" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
+    <input ref={searchRef} type='text' placeholder="Search for event titles" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} onKeyUp={checkEnter} />
   )
 }
 
@@ -31,6 +38,10 @@ export default function SearchButton() {
     }
   }
 
+  const closeSearch = (e) => {
+    setShowSearchBar(false)
+  }
+
   useEffect(() => {
     if (searchValue) {
       dispatch(changeView(`SEARCH:${searchValue}`))
@@ -42,23 +53,21 @@ export default function SearchButton() {
   useEffect(() => {
     if (!showSearchBar) return
 
-
-    const closeSearch = (e) => {
-      setShowSearchBar(false)
-    }
-
     document.addEventListener('click', closeSearch)
 
     return () => {
       document.removeEventListener('click', closeSearch)
+
     }
   }, [showSearchBar])
 
+
+
   return (
-    <div onClick={openSearch} className={`navbar__search ${showSearchBar ? 'navbar__search--open' : 'navbar__search--closed'}`}>
+    <div onClick={openSearch} className={`navbar__search ${showSearchBar ? 'navbar__search--open' : 'navbar__search--closed'}`} >
       <i className="fas fa-search"></i>
       {showSearchBar && (
-        <SearchField searchValue={searchValue} setSearchValue={setSearchValue} />
+        <SearchField searchValue={searchValue} setSearchValue={setSearchValue} closeSearch={closeSearch} />
       )}
     </div>
   )
