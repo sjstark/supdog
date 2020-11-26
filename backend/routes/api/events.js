@@ -87,7 +87,7 @@ router.get(
     const events = await Event.findAll({
       offset: start,
       limit: amount,
-      include: ['organizer', 'tickets', 'category']
+      include: ['organizer', 'tickets', 'category', 'eventDates']
     })
 
     return res.json({ events })
@@ -99,7 +99,7 @@ router.get(
   asyncHandler(async (req, res) => {
     const id = parseInt(req.params.id, 10)
     const event = await Event.findByPk(id, {
-      include: ['organizer', 'tickets', 'category']
+      include: ['organizer', 'tickets', 'category', 'eventDates']
     })
     res.json(event)
   })
@@ -116,7 +116,7 @@ router.get(
           [Op.iLike]: `%${searchParam}%`
         }
       },
-      include: ['organizer', 'tickets', 'category']
+      include: ['organizer', 'tickets', 'category', 'eventDates']
 
     })
 
