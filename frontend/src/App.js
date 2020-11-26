@@ -51,7 +51,7 @@ function App() {
           <Switch>
             <Route path="/events/:id"> <EventDetails /></Route>
             <Route path="/new-event"> <NewEventForm /> </Route>
-            <Route path='/image-test'> <ImageUpload aspect={1} /> </Route>
+            <Route path="/my-tickets"></Route>
             <Route path="/" render={() => <EventDisplay />} />
           </Switch>
 

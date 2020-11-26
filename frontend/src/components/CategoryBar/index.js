@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
 
 import { fetch } from '../../store/csrf'
+import { changeView } from '../../store/view';
 
 import './CategoryBar.css'
 
@@ -35,11 +38,24 @@ const getFontColor = (backgroundColor) => {
   return L > 0.179 ? '#000000' : '#ffffff'
 }
 
-function Category({ icon, title, color }) {
+function Category({ id, icon, title, color }) {
+  const dispatch = useDispatch()
+
+  const history = useHistory()
+
   const fontColor = getFontColor(color)
 
+  const setView = (e) => {
+    e.stopPropagation()
+
+    dispatch(changeView(`CATEGORY:${id}`))
+
+    history.push('/')
+
+  }
+
   return (
-    <div className="category-bar__category-wrapper">
+    <div className="category-bar__category-wrapper" onClick={setView}>
       <div className="category-bar__category-bubble" style={{ backgroundColor: color }}>
         <i className={icon} style={{ color: fontColor }} />
       </div>
@@ -70,7 +86,7 @@ export default function CategoryBar() {
         {catLoaded &&
           categories.map(category => {
             return (
-              <Category key={`category-${category.id}`} icon={category.icon} title={category.title} color={category.color} />
+              <Category key={`category-${category.id}`} id={category.id} icon={category.icon} title={category.title} color={category.color} />
             )
           })
         }

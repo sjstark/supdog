@@ -44,7 +44,7 @@ export default function ProfileButton() {
     <>
       <div onClick={openMenu} className="navbar__user-container">
         <div className="navbar__user-container-dropdown">
-          <i class="fas fa-caret-down"></i>
+          <i className="fas fa-caret-down"></i>
         </div>
         {sessionUser.profilePicURL && (<img className="navbar__profile-icon" src={sessionUser.profilePicURL} alt="" />)}
         {!sessionUser.profilePicURL && <FontAwesomeIcon icon={faUserCircle} className="navbar__profile-icon" />}

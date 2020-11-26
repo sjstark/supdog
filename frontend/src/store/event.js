@@ -20,7 +20,7 @@ const addEvents = (events) => ({
   payload: events
 })
 
-const clearEvents = () => ({
+const _clearEvents = () => ({
   type: CLEAR_EVENTS
 })
 
@@ -42,12 +42,29 @@ const clearEvents = () => ({
 //   }
 // }
 
-export const loadMoreEvents = (start, amount) => {
+export const clearEvents = () => {
+  return dispatch => {
+    return dispatch(_clearEvents())
+  }
+}
+
+export const loadMoreEvents = (start, amount, view) => {
   return async dispatch => {
 
-    const res = await fetch(`/api/events?start=${start}&amount=${amount}`)
+    let res;
+    if (view && view.startsWith('CATEGORY:')) {
+      let categoryId = view.slice(9)
+      res = await fetch(`/api/categories/${categoryId}?start=${start}&amoount=${amount}`)
+    } else if (view && view.startsWith('SEARCH:')) {
+      let searchQuery = encodeURI(view.slice(7))
+      res = await fetch(`/api/events/search?start=${start}&amount=${amount}&search=${searchQuery}`)
+    } else {
+      res = await fetch(`/api/events?start=${start}&amount=${amount}`)
+    }
 
-    return dispatch(addEvents(res.data.events))
+
+    if (res.data.events && res.data.events.length >= 1) return dispatch(addEvents(res.data.events))
+    return dispatch(clearEvents())
   }
 }
 
@@ -83,11 +100,6 @@ const initialState = []
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    // case GET_N_EVENTS:
-    //   return state.events.slice(payload.start, payload.start + payload.amount)
-
-    // case GET_ALL_EVENTS:
-    //   return state.events
 
     case SET_EVENTS:
       return [...payload]

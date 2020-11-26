@@ -11,23 +11,26 @@ const { Event, User, Ticket, SoldTicket, Category } = require('../../db/models')
 const router = express.Router({ mergeParams: true });
 
 router.get(
-  '/:categoryId(\\d+)',
+  '/:id(\\d+)',
   asyncHandler(async (req, res) => {
 
-    const categoryId = parseInt(req.params.categoryId, 10)
-    let { start, amount } = req.query
-    start = parseInt(start, 10)
-    amount = parseInt(amount, 10)
+    const categoryId = parseInt(req.params.id, 10)
 
-    let events = Event.findAll({
+    let { start, amount } = req.query
+    start = start ? parseInt(start, 10) : 0
+    amount = amount ? parseInt(amount, 10) : 10
+
+
+    let events = await Event.findAll({
       where: {
-        categoryId
+        categoryId: categoryId
       },
       limit: amount,
       offset: start
     })
 
-    res.json(events)
+
+    return res.json(events)
 
   })
 )

@@ -1,11 +1,21 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect } from 'react'
+import { connect, useDispatch } from 'react-redux'
+import { clearEvents, loadMoreEvents } from '../../store/event'
 
 import EventCard from '../EventCard'
 
 import './EventDisplay.css'
 
-function EventDisplay({ events }) {
+function EventDisplay({ events, view }) {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    (async () => {
+      dispatch(clearEvents())
+      dispatch(loadMoreEvents(0, 10, view))
+    })()
+  }, [view])
+
   return (
     <ul className="event-display-list">
       {events && events
@@ -20,7 +30,7 @@ function EventDisplay({ events }) {
   )
 }
 
-const mapStateToProps = state => ({ events: state.events })
+const mapStateToProps = state => ({ events: state.events, view: state.view })
 
 
 export default connect(mapStateToProps)(EventDisplay)

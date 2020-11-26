@@ -18,6 +18,7 @@
 }
 
 .navbar__logo {
+  cursor: pointer;
   margin-left: 15px;
 }
 
