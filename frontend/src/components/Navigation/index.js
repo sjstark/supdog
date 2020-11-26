@@ -8,6 +8,7 @@ import SignupFormModal from '../SignupFormPage';
 
 import './Navigation.css'
 import { changeView } from '../../store/view';
+import * as  sessionActions from '../../store/session'
 
 
 export default function Navigation({ isLoaded }) {
@@ -15,6 +16,14 @@ export default function Navigation({ isLoaded }) {
   const dispatch = useDispatch()
 
   const sessionUser = useSelector(state => state.session.user)
+
+  const loginAsDemo = (e) => {
+    e.stopPropagation();
+    const credential = 'demo@user.io'
+    const password = 'password'
+
+    return dispatch(sessionActions.login({ credential, password }))
+  }
 
   let sessionLinks;
 
@@ -25,6 +34,7 @@ export default function Navigation({ isLoaded }) {
   } else {
     sessionLinks = (
       <>
+        <div onClick={loginAsDemo} className="button">Demo</div>
         <LoginFormModal />
         <SignupFormModal />
       </>

@@ -30,6 +30,7 @@
 .navbar__links {
   display:flex;
   align-items: center;
+  padding-left: 10px;
 
   border-left: 1px solid rgba(0,0,0,.1);
 }
