@@ -50,7 +50,9 @@ export default function EventCard({ event }) {
 
   return (
     <div key={`event-${id}`} className="event-card__wrapper" onClick={handleClick}>
-      <div className="event-card__date-banner"><span>{nextDate}</span></div>
+      <div className="event-card__date-banner">{nextDate}</div>
+      <h1 className="event-card__floating-details-title">{title}</h1>
+
       <div className='event-card__foreground'>
         <div className="event-card__picture-wrapper">
           <img className="event-card__picture" src={eventPicURL} alt="" />

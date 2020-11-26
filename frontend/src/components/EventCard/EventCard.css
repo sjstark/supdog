@@ -47,6 +47,26 @@
 
 }
 
+.event-card__floating-details-title {
+  z-index: 12;
+
+  position: absolute;
+
+  font-size: 20px;
+  text-align: center;
+
+  top: 260px;
+  transition: all .5s ease-in-out;
+
+}
+
+.event-card__wrapper:hover .event-card__floating-details-title {
+  top: 207px;
+  transition: all .4s ease-in-out;
+
+}
+
+
 .event-card__foreground {
   position: absolute;
 
@@ -103,6 +123,7 @@
 }
 
 .event-card__foreground-details-title {
+  visibility: hidden;
   height: 2rem;
   margin-top: 10px;
   font-size: 20px;
@@ -214,6 +235,7 @@
 }
 
 .event-card__background-title {
+  visibility: hidden;
   font-size: 20px;
   text-align: center;
 }
