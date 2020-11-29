@@ -7,6 +7,16 @@
   align-items: center;
 }
 
+.event-details__edit-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  width: 40px;
+
+  background-color: white;
+}
+
 .event-details__background-container {
   z-index: -1;
   width: 100%;

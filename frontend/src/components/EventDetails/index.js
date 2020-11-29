@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import * as formatDate from 'date-format'
 
 
@@ -10,6 +11,9 @@ import DateItem from '../DateItem'
 import './EventDetails.css'
 
 export default function EventDetails() {
+  const history = useHistory()
+
+  const sessionUser = useSelector(state => state.session.user)
 
   let { id } = useParams()
   const [event, setEvent] = useState(null)
@@ -38,11 +42,19 @@ export default function EventDetails() {
 
   }, [id])
 
+  const editEvent = (e) => {
+    history.push(`/events/${id}/edit`)
+  }
 
   return (
     <>
       {event && (
         <div className="event-details__container">
+          {event.organizer && (event.organizer.id == sessionUser.id ) && (
+            <div onClick={editEvent} className="button event-details__edit-button">
+              <i className="fas fa-pencil-alt"></i>
+            </div>
+          )}
           <div className="event-details__background-container">
             <div className="event-details__background-image-container">
               <img className="event-details__background-image" src={event.eventPicURL} alt="" />
