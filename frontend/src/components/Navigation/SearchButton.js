@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 
 import { useDispatch } from 'react-redux'
+import { clearEvents } from '../../store/event'
 
 import { changeView } from '../../store/view'
 
@@ -43,11 +44,13 @@ export default function SearchButton() {
   }
 
   useEffect(() => {
+    let timeoutId
     if (searchValue) {
-      dispatch(changeView(`SEARCH:${searchValue}`))
+      timeoutId = setTimeout(() => dispatch(changeView(`SEARCH:${searchValue}`)),250)
     } else {
-      dispatch(changeView(null))
+      timeoutId = setTimeout(dispatch(changeView(null)))
     }
+    return () => clearTimeout(timeoutId)
   }, [searchValue])
 
   useEffect(() => {

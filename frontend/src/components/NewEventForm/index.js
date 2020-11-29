@@ -33,6 +33,8 @@ export default function NewEventForm() {
   const [sending, setSending] = useState(false)
   const [step, setStep] = useState(0)
 
+  const [isComplete, setIsComplete] = useState(false)
+
   useEffect(() => {
     (async () => {
       let categoriesJSON = await fetch(`/api/categories`)
@@ -113,9 +115,10 @@ export default function NewEventForm() {
         </label>
         <ImageInput aspect={2} onChange={setEventPic} height={1080} width={2160} />
       </div> */}
-      <button onClick={() => history.replace('/')}>Cancel Event Creation</button>
-      {!sending && <button onClick={nextPage}>Next Step</button>}
-      {sending && <button disabled={true}>Next Step</button>}
+      <div className="button " onClick={() => history.replace('/')}>Cancel Event Creation</div>
+      {isComplete && <div className="button button--primary"onClick={nextPage}>Next Step</div>}
+      {!isComplete && <div className="button button--primary button--disabled">Next Step</div>}
+
 
     </form>
   )
@@ -133,9 +136,9 @@ export default function NewEventForm() {
       </div>      </div>
 
 
-      <button onClick={() => history.replace('/')}>Cancel Event Creation</button>
-      {!sending && <button onClick={nextPage}>Next Step</button>}
-      {sending && <button disabled={true}>Next Step</button>}
+      <div className="button " onClick={() => history.replace('/')}>Cancel Event Creation</div>
+      <div className="button " onClick={lastPage}>Previous Step</div>
+      <div className="button button--primary"onClick={nextPage}>Next Step</div>
 
     </form>
   )
@@ -167,6 +170,8 @@ export default function NewEventForm() {
         <button onClick={addTicket}>Create Current Ticket</button>
         {(tickets.length >= 1) && (<button type='submit'>Create Event</button>)}
         {!(tickets.length >= 1) && (<button disabled={true} type='submit'>Create Event</button>)}
+        {!sending && <div className="button button--primary"onClick={nextPage}>Next Step</div>}
+        {sending && <div className="button button--disabled">Next Step</div>}
 
         {/* {!sending && <button type="submit">Create Event</button>}
         {sending && <button disabled={true}>Create Event</button>} */}
@@ -192,6 +197,7 @@ export default function NewEventForm() {
 
   const formSteps = [
     EventDetailsForm,
+    EventImageForm,
     TicketCreateForm
   ]
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
-import { clearEvents, loadMoreEvents } from '../../store/event'
+import { clearEvents, loadMoreEvents, loadInitialEvents } from '../../store/event'
 
 
 import { fetch } from '../../store/csrf'
@@ -37,13 +37,23 @@ function EventDisplay({ events, view, myEvents }) {
 
 
   useEffect(() => {
-    (async () => {
-      setIsLoaded(false)
-      await dispatch(clearEvents())
-      await dispatch(loadMoreEvents(0, 10, view))
-      await changeViewName(view)
-      setIsLoaded(true)
-    })()
+    if (view && view.startsWith('SEARCH:')) {
+      return (async () => {
+        setIsLoaded(false)
+        await dispatch(loadInitialEvents(view))
+        await changeViewName(view)
+        setIsLoaded(true)
+      })()
+    }
+    else {
+      (async () => {
+        setIsLoaded(false)
+        await dispatch(clearEvents())
+        await dispatch(loadMoreEvents(0, 10, view))
+        await changeViewName(view)
+        setIsLoaded(true)
+      })()
+    }
   }, [view])
 
   const getMoreEvents = async (e) => {

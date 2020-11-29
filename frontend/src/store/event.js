@@ -73,6 +73,13 @@ export const loadMoreEvents = (start, amount, view) => {
   }
 }
 
+export const loadInitialEvents = (view) => {
+  return async dispatch => {
+    await dispatch(clearEvents())
+    return await dispatch(loadMoreEvents(0, 10, view))
+  }
+}
+
 export const createNewEvent = (event) => {
   const { title, summary, organizer, about, eventPic, tickets } = event
 
