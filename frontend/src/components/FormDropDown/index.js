@@ -36,7 +36,7 @@ export default function FormInputField({ name, value, onChange, required, option
   }
 
   return (
-    <div onClick={focusChildInput} className="form-select__container">
+    <div onClick={focusChildInput} className={`form-select__container${value && ' form-select__container--filled'}`}>
       <div onClick={focusSiblingInput} className="form-select__name">{name}</div>
       <select
         onClick={(e) => e.stopPropagation()}

@@ -1,9 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
 import './FormInput.css'
 
 export default function FormInput({ name, type, value, onChange, required, maxLength }) {
   const [focused, setFocused] = useState(false)
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    if (value) {
+
+    }
+  }, [])
 
   const focusChildInput = (e) => {
     e.preventDefault();
@@ -36,7 +43,7 @@ export default function FormInput({ name, type, value, onChange, required, maxLe
   }
 
   return (
-    <div onClick={focusChildInput} className="form-input__container">
+    <div onClick={focusChildInput} className={`form-input__container${value && ' form-input__container--filled'}`}>
       <div onClick={focusSiblingInput} className="form-input__name">{name}</div>
       <input
         onClick={(e) => e.stopPropagation()}
@@ -48,6 +55,7 @@ export default function FormInput({ name, type, value, onChange, required, maxLe
         onChange={onChange}
         required={required}
         maxLength={maxLength}
+        ref={inputRef}
       />
     </div>
   )

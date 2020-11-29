@@ -36,7 +36,7 @@ export default function FormInputField({ name, value, onChange, required, rows, 
   }
 
   return (
-    <div onClick={focusChildInput} className="form-input-field__container">
+    <div onClick={focusChildInput} className={`form-input-field__container${value && ' form-input-field__container--filled'}`}>
       <div onClick={focusSiblingInput} className="form-input-field__name">{name}</div>
       <textarea
         onClick={(e) => e.stopPropagation()}

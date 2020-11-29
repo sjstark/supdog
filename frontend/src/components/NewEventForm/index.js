@@ -20,9 +20,9 @@ export default function NewEventForm() {
   const [title, setTitle] = useState('')
   const [summary, setSummary] = useState('')
   const [about, setAbout] = useState('')
-
   const [categories, setCategories] = useState([])
   const [categoryId, setCategoryId] = useState('')
+
   const [eventPic, setEventPic] = useState(null)
 
   const [tickets, setTickets] = useState([])
@@ -44,14 +44,18 @@ export default function NewEventForm() {
 
   }, [])
 
+  useEffect(() => {
+    if (
+      (title && title.length >= 4 && title.length <= 50) &&
+      (summary && summary.length >= 5 && summary.length <= 120) &&
+      (categoryId)
+    ) setIsComplete(true)
 
+  }, [title, summary, about, categoryId])
 
   const sessionUser = useSelector(state => state.session.user)
   // Redirect back to homepage if user is not logged in
   if (!sessionUser) return (<Redirect to='/' />)
-
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
