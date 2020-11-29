@@ -37,7 +37,7 @@ router.get(
           attributes: ['name'],
           include: {
             model: Event,
-            attributes: ['title','eventPicURL'],
+            attributes: ['id', 'title', 'eventPicURL'],
           }
         },
         where: {

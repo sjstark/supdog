@@ -35,10 +35,25 @@ export default function TicketsDisplay() {
 
   return (
     <div>
-      {!sessionUser && <div> Please Log In to view your tickets! </div>}
-      {tickets && tickets.map( (ticket, idx) => {
-        return <TicketCard key={ticket.id} ticketSale={ticket} alter={setAltered}/>
-      })}
+      {!sessionUser && <div className="message"> Please Log In to view your tickets! </div>}
+
+      {sessionUser && (
+        <>
+          <div className="event-display-title">Your Tickets:</div>
+            {tickets && tickets.map( (ticket, idx) => {
+              return <TicketCard key={ticket.id} ticketSale={ticket} alter={setAltered}/>
+          })}
+          {tickets.length === 0 && (
+            <div className="message">
+              Your tickets are empty! Go make some reservations!
+            </div>
+          )}
+          </>
+      )}
+
+
+
+
     </div>
   )
 }
