@@ -127,20 +127,18 @@ router.get(
   })
 )
 
-//TODO: Make my events route
 router.get(
   '/my-events',
   requireAuth,
   asyncHandler(async (req, res) => {
-    const events = await Event.min('start', {
+    const events = await Event.findAll({
       where: {
-        eventId: id,
-        start: {
-          [Op.gte]: Sequelize.fn('now')
-        }
-      }
+        organizerId: req.user.id
+      },
+      include: ['organizer', 'tickets', 'category', 'eventDates']
+
     })
-    res.json(date)
+    res.json(events)
   })
 )
 
