@@ -7,6 +7,7 @@ import EventDisplay from './components/EventDisplay';
 import EventDetails from './components/EventDetails';
 import NewEventForm from './components/NewEventForm';
 import CategoryBar from './components/CategoryBar';
+import TicketsDisplay from './components/TicketsDisplay';
 
 import { restoreUser } from './store/session';
 import { loadMoreEvents } from './store/event';
@@ -49,7 +50,7 @@ function App({view}) {
             <Route path="/events/:eventId/edit"><NewEventForm /></Route>
             <Route path="/events/:id"> <EventDetails /></Route>
             <Route path="/new-event"> <NewEventForm /> </Route>
-            <Route path="/my-tickets"><EventDetails /></Route>
+            <Route path="/my-tickets"><TicketsDisplay /></Route>
             <Route path="/my-events"><EventDisplay myEvents={true} /></Route>
             <Route path="/"> <EventDisplay myEvents={false} /> </Route>
           </Switch>

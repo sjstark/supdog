@@ -17,6 +17,7 @@ const router = express.Router({ mergeParams: true });
 
 router.get(
   '',
+  requireAuth,
   asyncHandler(async (req, res) => {
     let paramsKeys = Object.keys(req.params)
 
@@ -36,12 +37,12 @@ router.get(
           attributes: ['name'],
           include: {
             model: Event,
-            attributes: ['title'],
+            attributes: ['title','eventPicURL'],
           }
         },
         where: {
-          userId: req.params.userId
-        }
+          userId: req.user.id
+        },
       })
     }
 
@@ -57,6 +58,58 @@ router.post(
     let ticketSale = await ticket.sellTicketTo(req.user.id)
     if (!ticketSale) return res.json('Ticket is sold out for this event')
     return res.json(ticketSale)
+  })
+)
+
+router.delete(
+  '/:ticketId(\\d+)/one',
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    let {ticketId} = req.params
+
+    console.log(ticketId)
+
+    let ticket = await SoldTicket.findOne({
+      where: {
+        userId: req.user.id,
+        ticketId
+      }
+    })
+
+    if (ticket) {
+      let ticketToUpdate = await Ticket.findByPk(ticketId)
+      await ticket.destroy()
+      await ticketToUpdate.decrement('sold')
+      return res.json('Success')
+    } else {
+      return res.json('Fail')
+    }
+  })
+)
+
+router.delete(
+  '/:ticketId(\\d+)/all',
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    let {ticketId} = req.params
+
+    let tickets = await SoldTicket.findAll({
+      where: {
+        userId: req.user.id,
+        ticketId
+      }
+    })
+
+    if (tickets.length > 0) {
+      let ticketToUpdate = await Ticket.findByPk(ticketId)
+      tickets.forEach(async ticket => {
+        await ticket.destroy()
+        await ticketToUpdate.decrement('sold')
+      })
+      return res.json('Success')
+    } else {
+      return res.json('Fail')
+    }
   })
 )
 
