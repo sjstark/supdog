@@ -1,16 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 
 import './FormInput.css'
 
 export default function FormInput({ name, type, value, onChange, required, maxLength }) {
   const [focused, setFocused] = useState(false)
-  const inputRef = useRef(null)
 
-  useEffect(() => {
-    if (value) {
-
-    }
-  }, [])
 
   const focusChildInput = (e) => {
     e.preventDefault();
@@ -55,7 +49,6 @@ export default function FormInput({ name, type, value, onChange, required, maxLe
         onChange={onChange}
         required={required}
         maxLength={maxLength}
-        ref={inputRef}
       />
     </div>
   )

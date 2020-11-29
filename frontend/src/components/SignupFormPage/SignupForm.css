@@ -10,8 +10,6 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-
-  overflow-y: scroll;
 }
 
 .signup-form__inputs-container {
@@ -37,7 +35,7 @@
 }
 
 .signup-form__profile-pic * {
-  margin: 5px;
+  /* margin: 5px; */
 }
 
 .signup-form li {

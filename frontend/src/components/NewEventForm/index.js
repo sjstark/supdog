@@ -23,7 +23,7 @@ export default function NewEventForm() {
   const [categories, setCategories] = useState([])
   const [categoryId, setCategoryId] = useState('')
 
-  const [eventPic, setEventPic] = useState(null)
+  const [eventPic, setEventPic] = useState('')
 
   const [tickets, setTickets] = useState([])
   const [ticketType, setTicketType] = useState('')
@@ -136,7 +136,7 @@ export default function NewEventForm() {
           Event Picture:
           <span>2160px x 1080px (2:1 ratio)</span>
         </label>
-        <ImageInput aspect={2} onChange={setEventPic} height={1080} width={2160} />
+        <ImageInput aspect={2} value={eventPic} onChange={setEventPic} height={1080} width={2160} />
       </div>      </div>
 
 
