@@ -61,7 +61,7 @@ export const loadMoreEvents = (start, amount, view) => {
       res = await fetch(`/api/events/search?start=${start}&amount=${amount}&search=${searchQuery}`)
     }
     else if (view && view === 'MY-EVENTS' ) {
-      res = await fetch(`/api/events/my-events`)
+      res = await fetch(`/api/events/my-events?start=${start}&amount=${amount}`)
     }
     else {
       res = await fetch(`/api/events?start=${start}&amount=${amount}`)

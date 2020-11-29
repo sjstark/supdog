@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import { logout } from '../../store/session'
 import { changeView } from '../../store/view'
@@ -13,6 +13,8 @@ import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
 
 export default function ProfileButton() {
   const dispatch = useDispatch()
+  const history = useHistory()
+
   const [showMenu, setShowMenu] = useState(false)
 
   const sessionUser = useSelector(state => state.session.user)
@@ -45,6 +47,7 @@ export default function ProfileButton() {
   const setMyEvents = (e) => {
     e.preventDefault()
     dispatch(changeView(`MY-EVENTS`))
+    history.push('/')
   }
 
   return (

@@ -203,11 +203,15 @@ router.get(
   '/my-events',
   requireAuth,
   asyncHandler(async (req, res) => {
+    const { start, amount } = req.query
+
     const events = await Event.findAll({
       where: {
         organizerId: req.user.id
       },
-      include: ['organizer', 'tickets', 'category', 'eventDates']
+      include: ['organizer', 'tickets', 'category', 'eventDates'],
+      offset: start,
+      limit: amount,
 
     })
     res.json({events})
