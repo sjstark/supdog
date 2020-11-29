@@ -32,11 +32,14 @@ export default function EventCard({ event }) {
   useEffect(() => {
     (async () => {
       let res = await fetch(`/api/events/${event.id}/next-date`)
-      let date = formatDate.asString(
-        'MM/dd',
-        new Date(res.data)
-      )
-      // let res = await fetch(`/api/events/${event.id}/next-date`)
+      let date
+      if (res.data === 0) date = 'Over'
+      else {
+        date = formatDate.asString(
+          'MM/dd',
+          new Date(res.data)
+        )
+      }
 
       setNextDate(date)
     })()

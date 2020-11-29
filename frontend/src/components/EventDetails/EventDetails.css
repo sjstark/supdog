@@ -63,9 +63,24 @@
   grid-column: 2/3;
   background-color: white;
 
-  padding: 10px;
+  height:350px;
+
+  padding: 20px;
 
   display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.event-detail__header-date {
+  font-size: 24px;
+  align-self: flex-end;
+  flex-grow: .3;
+}
+
+.event-detail__header-details {
+  flex-grow: 2;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -76,11 +91,14 @@
   text-align: center;
   line-height: 1.5;
 
+
 }
 
 .event-detail__header-organizer {
   display: flex;
+  justify-content: center;
   align-items: center;
+  margin-top: 30px;
 }
 
 .event-detail__header-organizer-pic {
@@ -139,4 +157,11 @@
   padding: 20px;
   padding-top: 80px;
   padding-bottom: 30px;
+}
+
+.event-detail__occurance {
+
+  margin: 15px 0;
+
+
 }

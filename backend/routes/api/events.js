@@ -127,6 +127,23 @@ router.get(
   })
 )
 
+//TODO: Make my events route
+router.get(
+  '/my-events',
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const events = await Event.min('start', {
+      where: {
+        eventId: id,
+        start: {
+          [Op.gte]: Sequelize.fn('now')
+        }
+      }
+    })
+    res.json(date)
+  })
+)
+
 router.get(
   '/search',
   asyncHandler(async (req, res) => {

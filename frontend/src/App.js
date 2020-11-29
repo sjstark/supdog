@@ -50,7 +50,7 @@ function App() {
           <Switch>
             <Route path="/events/:id"> <EventDetails /></Route>
             <Route path="/new-event"> <NewEventForm /> </Route>
-            <Route path="/my-tickets"></Route>
+            <Route path="/my-tickets"><EventDetails /></Route>
             <Route path="/" render={() => <EventDisplay />} />
           </Switch>
 
