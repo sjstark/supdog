@@ -74,7 +74,6 @@ export default function EventDetails() {
                   Dates
                 </h1>
                 {event.eventDates.map(date => {
-                  console.log(date)
                   return (<DateItem key={date.id} date={date} />)
                 })}
                 <h1 style={{ fontSize: "24px" }}>

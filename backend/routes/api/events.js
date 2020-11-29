@@ -138,7 +138,7 @@ router.get(
       include: ['organizer', 'tickets', 'category', 'eventDates']
 
     })
-    res.json(events)
+    res.json({events})
   })
 )
 
@@ -157,10 +157,6 @@ router.get(
 
     })
 
-    // console.log('\n\n\n\n')
-    // console.log(searchParam)
-    // console.log(events)
-    // console.log('\n\n\n\n')
     res.json({ events })
   })
 )

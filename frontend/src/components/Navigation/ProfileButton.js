@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { logout } from '../../store/session'
+import { changeView } from '../../store/view'
+
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -40,6 +42,11 @@ export default function ProfileButton() {
     dispatch(logout())
   }
 
+  const setMyEvents = (e) => {
+    e.preventDefault()
+    dispatch(changeView(`MY-EVENTS`))
+  }
+
   return (
     <>
       <div onClick={openMenu} className="navbar__user-container">
@@ -56,7 +63,7 @@ export default function ProfileButton() {
           </div>
           <div className="navbar__dropdown-links">
             <Link className='navbar__dropdown-link' to="/new-event">Create A New Event</Link>
-            <Link className='navbar__dropdown-link' to="/my-events">My Events</Link>
+            <div className='navbar__dropdown-link' onClick={setMyEvents}>My Events</div>
             <Link className='navbar__dropdown-link' to="/my-tickets">My Tickets</Link>
             <div className='navbar__dropdown-link' onClick={handleLogout}>Log Out</div>
           </div>

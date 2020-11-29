@@ -55,10 +55,15 @@ export const loadMoreEvents = (start, amount, view) => {
     if (view && view.startsWith('CATEGORY:')) {
       let categoryId = view.slice(9)
       res = await fetch(`/api/categories/${categoryId}?start=${start}&amoount=${amount}`)
-    } else if (view && view.startsWith('SEARCH:')) {
+    }
+    else if (view && view.startsWith('SEARCH:')) {
       let searchQuery = encodeURI(view.slice(7))
       res = await fetch(`/api/events/search?start=${start}&amount=${amount}&search=${searchQuery}`)
-    } else {
+    }
+    else if (view && view === 'MY-EVENTS' ) {
+      res = await fetch(`/api/events/my-events`)
+    }
+    else {
       res = await fetch(`/api/events?start=${start}&amount=${amount}`)
     }
 

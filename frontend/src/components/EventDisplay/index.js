@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { clearEvents, loadMoreEvents } from '../../store/event'
 
+
 import { fetch } from '../../store/csrf'
 
 import EventCard from '../EventCard'
@@ -9,7 +10,7 @@ import Footer from '../Footer'
 
 import './EventDisplay.css'
 
-function EventDisplay({ events, view, isLoading }) {
+function EventDisplay({ events, view, myEvents }) {
   const dispatch = useDispatch()
   const [isLoaded, setIsLoaded] = useState(false)
   const [viewName, setViewName] = useState('All Events')
@@ -23,6 +24,9 @@ function EventDisplay({ events, view, isLoading }) {
       let searchParam = view.slice(7)
       return setViewName(`Search for: ${searchParam}`)
     }
+    if (view === 'MY-EVENTS') {
+      return setViewName(`Your Created Events`)
+    }
     if (view.startsWith('CATEGORY:')) {
       let categoryId = view.slice(9)
       let res = await fetch(`/api/categories/${categoryId}/title`)
@@ -30,6 +34,7 @@ function EventDisplay({ events, view, isLoading }) {
     }
 
   }
+
 
   useEffect(() => {
     (async () => {

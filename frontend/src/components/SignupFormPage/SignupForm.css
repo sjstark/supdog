@@ -18,13 +18,13 @@
   display: flex;
   flex-direction: row;
   margin: 10px 40px;
-
 }
 
 .signup-form__input-fields {
   display: flex;
   flex-direction: column;
   margin: 20px;
+  min-width: 300px;
 }
 
 .signup-form__profile-pic {
@@ -33,7 +33,7 @@
 
 .signup-form__profile-pic span {
   font-size: 12px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .signup-form__profile-pic * {
@@ -41,9 +41,7 @@
 }
 
 .signup-form li {
-
-
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: red;
 }
 
@@ -59,6 +57,5 @@
   background-color: pink;
   border-radius: 10px;
 
-  list-style-type: circle ;
-
+  list-style-type: circle;
 }

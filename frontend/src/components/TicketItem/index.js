@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+
 
 import { fetch } from '../../store/csrf'
 
@@ -6,6 +8,8 @@ import './TicketItem.css'
 
 export default function TicketItem({ ticket, getEvent }) {
   let isSoldOut = ticket.sold >= ticket.quantity
+
+  const sessionUser = useSelector(state => state.session.user)
 
   useEffect(() => {
     isSoldOut = ticket.sold >= ticket.quantity
@@ -43,12 +47,16 @@ export default function TicketItem({ ticket, getEvent }) {
         <h2 className="ticket-item__tickets-left">{ticket.quantity - ticket.sold} Left</h2>
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        {!isSoldOut && (
+        {sessionUser && !isSoldOut && (
           <div onClick={registerUser} className="button button--small button--primary">Register</div>
+        )}
+        {!sessionUser && !isSoldOut && (
+          <div className="button button--small button--disabled" style={{fontSize:'10px'}}>Please Log In </div>
         )}
         {isSoldOut && (
           <div className="button button--small button--disabled">Sold Out</div>
         )}
+
         <div className="success">Success!</div>
       </div>
     </div >

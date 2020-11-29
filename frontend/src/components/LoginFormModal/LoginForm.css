@@ -14,10 +14,12 @@
 .login-form__input-fields {
   display: flex;
   flex-direction: column;
+
+  min-width: 300px;
 }
 
 .login-form li {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: red;
 }
 
@@ -33,6 +35,5 @@
   background-color: pink;
   border-radius: 10px;
 
-  list-style-type: circle ;
-
+  list-style-type: circle;
 }

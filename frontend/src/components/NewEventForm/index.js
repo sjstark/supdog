@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import { Redirect, useHistory } from 'react-router-dom'
@@ -6,6 +6,12 @@ import { Redirect, useHistory } from 'react-router-dom'
 import { createNewEvent } from '../../store/event'
 
 import ImageInput from '../ImageCropper/ImageInput'
+import FormInput from '../FormInput'
+import FormInputField from '../FormInputField'
+import FormDropDown from '../FormDropDown'
+
+import { fetch } from '../../store/csrf'
+
 
 
 export default function NewEventForm() {
@@ -14,6 +20,9 @@ export default function NewEventForm() {
   const [title, setTitle] = useState('')
   const [summary, setSummary] = useState('')
   const [about, setAbout] = useState('')
+
+  const [categories, setCategories] = useState([])
+  const [categoryId, setCategoryId] = useState('')
   const [eventPic, setEventPic] = useState(null)
 
   const [tickets, setTickets] = useState([])
@@ -24,10 +33,23 @@ export default function NewEventForm() {
   const [sending, setSending] = useState(false)
   const [step, setStep] = useState(0)
 
-  const sessionUser = useSelector(state => state.session.user)
+  useEffect(() => {
+    (async () => {
+      let categoriesJSON = await fetch(`/api/categories`)
 
+      setCategories(categoriesJSON.data)
+    })();
+
+  }, [])
+
+
+
+  const sessionUser = useSelector(state => state.session.user)
   // Redirect back to homepage if user is not logged in
   if (!sessionUser) return (<Redirect to='/' />)
+
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -76,39 +98,41 @@ export default function NewEventForm() {
 
   const EventDetailsForm = (
     <form className="event-create-form">
-      <ul>
-        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-      </ul>
+      <h1>Event Details</h1>
       <div>
-        <label>
-          Event Title:
-          <input type="text" value={title} onChange={({ target }) => setTitle(target.value)} />
-        </label>
+        <FormInput name='Event Title' required={true} maxLength={50} type="text" value={title} onChange={({ target }) => setTitle(target.value)} />
+        <FormInputField name='Event Summary' required={true} maxLength={120} rows={2} cols={60} value={summary} onChange={({ target }) => setSummary(target.value)} />
+        <FormInputField name='About' required={true} rows={12} cols={60} value={about} onChange={({ target }) => setAbout(target.value)} />
+        <FormDropDown name="Category" required={true} options={categories} value={categoryId} onChange={({target}) => setCategoryId(target.value)} />
       </div>
+
+      {/* <div>
+        <label>
+          Event Picture:
+          <span>2160px x 1080px (2:1 ratio)</span>
+        </label>
+        <ImageInput aspect={2} onChange={setEventPic} height={1080} width={2160} />
+      </div> */}
+      <button onClick={() => history.replace('/')}>Cancel Event Creation</button>
+      {!sending && <button onClick={nextPage}>Next Step</button>}
+      {sending && <button disabled={true}>Next Step</button>}
+
+    </form>
+  )
+
+  const EventImageForm = (
+    <form className="event-create-form">
+      <h1>Event Image</h1>
       <div>
-        <label>
-          Summary:
-          <textarea rows={2} cols={50} value={summary} onChange={({ target }) => setSummary(target.value)} />
-        </label>
-      </div>
-      <div>
-        <label>
-          About:
-          <textarea value={about} rows={10} cols={50} onChange={({ target }) => setAbout(target.value)} />
-        </label>
-      </div>
       <div>
         <label>
           Event Picture:
           <span>2160px x 1080px (2:1 ratio)</span>
         </label>
         <ImageInput aspect={2} onChange={setEventPic} height={1080} width={2160} />
-        {/* <label>
-          Event Picture:
-          <input id='event-pic-upload' type="file" onChange={updateFile} />
-        </label>
-        {eventPicPreview && (<img width="500px" id="event-pic-preview" src={eventPicPreview} alt="Loading Event Pic..." />)} */}
-      </div>
+      </div>      </div>
+
+
       <button onClick={() => history.replace('/')}>Cancel Event Creation</button>
       {!sending && <button onClick={nextPage}>Next Step</button>}
       {sending && <button disabled={true}>Next Step</button>}
@@ -173,6 +197,9 @@ export default function NewEventForm() {
 
   return (
     <>
+      <ul>
+        {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+      </ul>
       {formSteps[step]}
     </>
   )
