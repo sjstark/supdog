@@ -46,12 +46,9 @@ function Category({ id, icon, title, color }) {
   const fontColor = getFontColor(color)
 
   const setView = (e) => {
-    e.stopPropagation()
-
     dispatch(changeView(`CATEGORY:${id}`))
 
     history.push('/')
-
   }
 
   return (

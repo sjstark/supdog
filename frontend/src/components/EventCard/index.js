@@ -47,7 +47,6 @@ export default function EventCard({ event }) {
   }, [event])
 
   const handleClick = (e) => {
-    e.stopPropagation()
     history.push(`/events/${id}`)
   }
 

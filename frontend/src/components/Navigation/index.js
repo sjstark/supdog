@@ -43,7 +43,6 @@ export default function Navigation({ isLoaded }) {
   }
 
   const logoClick = (e) => {
-    e.stopPropagation();
     dispatch(clearView())
     history.push('/')
   }
