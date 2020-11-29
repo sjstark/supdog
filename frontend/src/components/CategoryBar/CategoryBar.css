@@ -6,29 +6,37 @@
   height: 100vh;
 
   width: 80px;
-  transition: width .1s;
+  transition: width 0.1s;
 
   overflow-x: hidden;
 
   position: fixed;
-  background-color: rgb(232,239,243);
+  background-color: rgb(232, 239, 243);
 
-  font-family: 'Poppins','Helvetica','Arial', sans-serif;
+  font-family: "Poppins", "Helvetica", "Arial", sans-serif;
+}
+
+.category-bar ::-webkit-scrollbar {
+  width: 0px;
+}
+
+.category-bar:hover ::-webkit-scrollbar {
+  width: 5px;
 }
 
 .category-bar:hover {
   width: 320px;
-  transition: width .3s;
+  transition: width 0.3s;
 }
 
-.category-bar:hover .category-bar__title{
+.category-bar:hover .category-bar__title {
   opacity: 1;
-  transition: opacity .5s;
+  transition: opacity 0.5s;
 }
 
-.category-bar:hover .category-bar__category-title{
+.category-bar:hover .category-bar__category-title {
   opacity: 1;
-  transition: opacity .5s;
+  transition: opacity 0.5s;
 }
 
 .category-bar__title {
@@ -39,6 +47,7 @@
 
 .category-bar__categories {
   overflow-y: scroll;
+  overflow-x: hidden;
   height: 85%;
 }
 
@@ -78,7 +87,7 @@
 }
 
 .category-bar__category-wrapper:hover .category-bar__category-bubble {
-  box-shadow: 0 0 8px rgba(0,0,0,.5);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
 
 .category-bar__category-wrapper:hover .category-bar__category-title {
