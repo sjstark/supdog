@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import './FormInput.css'
 
-export default function FormInput({ name, type, value, onChange, required, maxLength }) {
+export default function FormInput({ name, type, value, onChange, required, maxLength, min, step }) {
   const [focused, setFocused] = useState(false)
 
 
@@ -49,6 +49,8 @@ export default function FormInput({ name, type, value, onChange, required, maxLe
         onChange={onChange}
         required={required}
         maxLength={maxLength}
+        min={min}
+        step={step}
       />
     </div>
   )

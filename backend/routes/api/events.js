@@ -56,6 +56,7 @@ router.post(
       summary,
       about,
       organizer,
+      categoryId,
     } = req.body;
 
     const tickets = JSON.parse(req.body.tickets)
@@ -69,7 +70,7 @@ router.post(
     let eventPicURL = null;
     if (req.file) eventPicURL = await singlePublicFileUpload(req.file, 'event-pics')
 
-    const event = await Event.create({ title, summary, about, eventPicURL, organizer })
+    const event = await Event.create({ title, summary, about, eventPicURL, organizerId: organizer, categoryId })
 
     tickets.forEach(async ticket => {
       let newTicket = { name: ticket.name, quantity: parseInt(ticket.quantity, 10), eventId: event.id }

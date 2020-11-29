@@ -9,14 +9,25 @@ export default function FormInputField({ name, value, onChange, required, option
     e.preventDefault();
     e.stopPropagation();
 
-    e.target.querySelector('textarea').focus()
+    let event = document.createEvent('MouseEvents')
+
+    event.initMouseEvent('mousedown',true,true,window);
+
+    e.target.parentElement.querySelector('select').focus()
+    e.target.parentElement.querySelector('select').dispatchEvent(event)
   }
 
   const focusSiblingInput = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
-    e.target.parentElement.querySelector('textarea').focus()
+    let event = document.createEvent('MouseEvents')
+
+    event.initMouseEvent('mousedown',true,true,window);
+
+    e.target.parentElement.querySelector('select').focus()
+    e.target.parentElement.querySelector('select').dispatchEvent(event)
+
   }
 
   const shiftName = (e) => {
@@ -37,7 +48,7 @@ export default function FormInputField({ name, value, onChange, required, option
 
   return (
     <div onClick={focusChildInput} className={`form-select__container${value && ' form-select__container--filled'}`}>
-      <div onClick={focusSiblingInput} className="form-select__name">{name}</div>
+      <div className="form-select__name">{name}</div>
       <select
         onClick={(e) => e.stopPropagation()}
         onFocus={shiftName}

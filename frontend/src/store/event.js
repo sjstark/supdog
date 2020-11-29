@@ -81,13 +81,15 @@ export const loadInitialEvents = (view) => {
 }
 
 export const createNewEvent = (event) => {
-  const { title, summary, organizer, about, eventPic, tickets } = event
+  const { title, summary, categoryId, organizer, about, eventPic, tickets, dates } = event
 
   const formData = new FormData();
   formData.append('title', title)
   formData.append('summary', summary)
   formData.append('organizer', organizer)
+  formData.append('categoryId', categoryId)
   formData.append('tickets', tickets)
+  formData.append('eventDates', dates)
   if (about) {
     formData.append('about', about)
   }
@@ -100,6 +102,7 @@ export const createNewEvent = (event) => {
       'content-type': 'multipart/form-data'
     }
   }
+
 
   return Axios.post('/api/events/', formData, config)
     .catch((err) => {

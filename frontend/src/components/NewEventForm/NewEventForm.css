@@ -1,0 +1,115 @@
+.event-create-form__title {
+  font-size: 24px;
+  align-self: flex-start;
+  /* margin: 20px 0; */
+  padding-bottom: 5px;
+
+  position: sticky;
+  top: 0;
+
+  background-color: white;
+}
+
+.new-event__form-container {
+  width: 100%;
+  padding: 50px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-event__form-container form {
+  min-width: 500px;
+}
+
+.create-event__buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.create-event__buttons-container * {
+  margin: 20px;
+}
+
+.event-image-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.event-image-form__header {
+  width: 100%;
+
+  margin-left: 100px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.event-image-form__directions {
+  align-self: flex-start;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.date-create__wrapper {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+
+  margin: 50px;
+}
+
+.date-create-form__eventdates-container {
+  min-width: 400px;
+
+  max-height: 400px;
+
+  overflow-y: auto;
+}
+
+.date-create-form__eventdates-container li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.date-create-form__eventdates-container li .event-detail__occurance {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ticket-create__wrapper {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+
+  margin: 50px;
+}
+
+.ticket-create-form__eventtickets-container {
+  min-width: 400px;
+  max-height: 400px;
+
+  overflow-y: auto;
+}
+
+.ticket-create-form__eventtickets-container li {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ticket-create-form__eventtickets-container li .event-detail__occurance {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ticket-create-form__eventtickets-container li .button {
+  justify-self: end;
+}
+.ticket-create-form__eventtickets-container li * {
+  align-self: center;
+  margin: 5px;
+}
