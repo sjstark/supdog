@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch, connect } from 'react-redux'
 import { Switch, Route } from 'react-router-dom'
 
 import Navigation from './components/Navigation';
@@ -11,16 +11,14 @@ import CategoryBar from './components/CategoryBar';
 import { restoreUser } from './store/session';
 import { loadMoreEvents } from './store/event';
 
-function App() {
+function App({view}) {
   const dispatch = useDispatch()
-
-  const [currentView, setCurrentView] = useState(null)
 
   const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
     dispatch(restoreUser())
-      .then(() => dispatch(loadMoreEvents(0, 10)))
+      .then(() => dispatch(loadMoreEvents(0, 10, view)))
       .then(() => setIsLoaded(true))
   }, [dispatch])
 
@@ -48,6 +46,7 @@ function App() {
         {isLoaded && (
 
           <Switch>
+            <Route path="/events/:eventId/edit"><NewEventForm /></Route>
             <Route path="/events/:id"> <EventDetails /></Route>
             <Route path="/new-event"> <NewEventForm /> </Route>
             <Route path="/my-tickets"><EventDetails /></Route>
@@ -61,4 +60,7 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => ({ events: state.events, view: state.view })
+
+
+export default connect(mapStateToProps)(App);

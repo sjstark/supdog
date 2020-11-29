@@ -42,12 +42,13 @@ router.get(
       where: {
         categoryId: categoryId
       },
+      include: ['organizer', 'tickets', 'category', 'eventDates'],
       limit: amount,
       offset: start
     })
 
 
-    return res.json(events)
+    return res.json({events})
 
   })
 )

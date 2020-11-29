@@ -3,9 +3,9 @@ import { useSelector } from 'react-redux'
 
 import * as formatDate from 'date-format'
 
-import { Redirect, useHistory } from 'react-router-dom'
+import { Redirect, useHistory, useParams } from 'react-router-dom'
 
-import { createNewEvent } from '../../store/event'
+import { createNewEvent, updateEvent } from '../../store/event'
 
 import ImageInput from '../ImageCropper/ImageInput'
 import FormInput from '../FormInput'
@@ -20,6 +20,9 @@ import DateItem from '../DateItem'
 
 export default function NewEventForm() {
   const history = useHistory()
+  const {eventId} = useParams()
+
+  const [event, setEvent] = useState(null)
 
   const [title, setTitle] = useState('')
   const [summary, setSummary] = useState('')
@@ -29,7 +32,7 @@ export default function NewEventForm() {
 
   const [eventPic, setEventPic] = useState('')
 
-  const [today, setToday] = useState(() => {
+  const [today] = useState(() => {
     let now = new Date();
     return formatDate.asString('yyyy-MM-ddThh:mm', now)
   })
@@ -98,7 +101,22 @@ export default function NewEventForm() {
       let categoriesJSON = await fetch(`/api/categories`)
 
       setCategories(categoriesJSON.data)
+
+      if (eventId) {
+        let eventJSON = await fetch(`/api/events/${eventId}`)
+         setEvent(eventJSON.data)
+
+        setTitle(eventJSON.data.title)
+        setSummary(eventJSON.data.summary)
+        setAbout(eventJSON.data.about)
+        setCategoryId(eventJSON.data.categoryId)
+        setEventPic(eventJSON.data.eventPicURL)
+        setEventDates(eventJSON.data.eventDates.map(eventDate => ({start: eventDate.start, end: eventDate.end, id: eventDate.id})))
+        setTickets(eventJSON.data.tickets.map(ticket => ({name: ticket.name, quantity: ticket.quantity, id: ticket.id})))
+
+      }
     })();
+
 
   }, [])
 
@@ -118,13 +136,29 @@ export default function NewEventForm() {
 
     setErrors([])
 
-    const event = { title, summary, about, eventPic, categoryId, organizer: sessionUser.id, tickets: JSON.stringify(tickets), dates: JSON.stringify(eventDates) }
+    const newEvent = { title, summary, about, eventPic, categoryId, organizer: sessionUser.id, tickets: JSON.stringify(tickets), dates: JSON.stringify(eventDates) }
 
-    return createNewEvent(event)
+    if (event) {
+      return updateEvent(event.id, newEvent)
+        .then((res) => {
+          if (res.statusText !== 'OK') throw res
+          else {
+            history.push(`/events/${event.id}`)
+          }
+        })
+        .catch((res) => {
+          if (res.data && res.data.errors) {
+            setErrors(res.data.errors)
+            setSending(false)
+          }
+        })
+    }
+    if (!event) {
+      return createNewEvent(newEvent)
       .then((res) => {
         if (res.statusText !== 'OK') throw res
         else {
-          history.push('/')
+          history.push(`/events/${res.data.id}`)
         }
       })
       .catch((res) => {
@@ -133,6 +167,7 @@ export default function NewEventForm() {
           setSending(false)
         }
       })
+    }
   }
 
   const addTicket = (e) => {
@@ -292,8 +327,8 @@ export default function NewEventForm() {
         <div className="button " onClick={lastPage}>Previous Step</div>
         {ticketType && ticketQty && (<div className="button button--primary" onClick={addTicket}>Add Ticket</div>)}
         {!(ticketType && ticketQty) && (<div className="button button--primary button--disabled" >Add Ticket</div>)}
-        {!sending && isComplete && <div className="button button--primary"onClick={handleSubmit}>Create Event</div>}
-        {(sending || !isComplete) && <div className="button button--primary button--disabled">Create Event</div>}
+        {!sending && isComplete && <div className="button button--primary"onClick={handleSubmit}>{(event && "Update Event") || "Create Event"}</div>}
+        {(sending || !isComplete) && <div className="button button--primary button--disabled">{(event && "Update Event") || "Create Event"}</div>}
       </div>
     </>
   )

@@ -8,7 +8,7 @@ import LoginFormModal from '../LoginFormModal'
 import SignupFormModal from '../SignupFormPage';
 
 import './Navigation.css'
-import { changeView } from '../../store/view';
+import { clearView } from '../../store/view';
 import * as  sessionActions from '../../store/session'
 
 
@@ -44,7 +44,7 @@ export default function Navigation({ isLoaded }) {
 
   const logoClick = (e) => {
     e.stopPropagation();
-    dispatch(changeView(null))
+    dispatch(clearView())
     history.push('/')
   }
 

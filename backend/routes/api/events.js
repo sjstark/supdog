@@ -86,6 +86,77 @@ router.post(
   })
 )
 
+router.put(
+  '',
+  singleMulterUpload('eventPic'),
+  requireAuth,
+  validateEvent,
+  asyncHandler(async (req, res) => {
+    const event = await Event.findByPk(req.body.eventId)
+
+    if (req.user.id !== event.organizerId) res.redirect('/')
+
+    const {
+      title,
+      summary,
+      about,
+      organizer,
+      categoryId,
+      eventPic
+    } = req.body;
+
+    const tickets = JSON.parse(req.body.tickets)
+    const eventDates = JSON.parse(req.body.eventDates)
+    // tickets = [];
+    // Object.keys(req.body).filter(key => key.startsWith('ticket')).forEach(ticketKey => {
+    //   tickets.push(req.body[ticketKey])
+    // })
+
+    let eventPicURL = null;
+    if (eventPic.startsWith('http')) {
+      eventPicURL = eventPic
+    } else {
+      await singleMulterUpload('eventPic')
+      eventPicURL = await singlePublicFileUpload(req.file, 'event-pics')
+    }
+
+    console.log({
+      title,
+      summary,
+      about,
+      organizer,
+      categoryId,
+      eventPic
+    })
+
+    event.title = title ? title : event.title
+    event.summary = summary ? summary : event.summary
+    event.about = about ? about : event.about
+    event.organizerId = organizer ? organizer : event.organizerId
+    event.categoryId = categoryId ? categoryId : event.categoryId
+    event.eventPicURL = eventPicURL ? eventPicURL : event.eventPicURL
+
+    await event.save()
+
+    tickets.forEach(async newTicket => {
+      const ticket = await Ticket.findByPk(newTicket.id)
+      ticket.name = newTicket.name
+      ticket.quantity = parseInt(newTicket.quantity, 10)
+      await ticket.save()
+    })
+
+    eventDates.forEach(async newEventDate => {
+      const eventDate = await EventDate.findByPk(newEventDate.id)
+      eventDate.start = new Date(newEventDate.start)
+      eventDate.end = new Date(newEventDate.end)
+      await eventDate.save()
+    })
+
+    return res.json(event)
+  })
+)
+
+
 router.get(
   '',
   asyncHandler(async (req, res) => {

@@ -68,7 +68,6 @@ export const loadMoreEvents = (start, amount, view) => {
     }
 
     let { events } = res.data
-
     if (events && events.length >= 1) return dispatch(addEvents(events))
   }
 }
@@ -109,6 +108,37 @@ export const createNewEvent = (event) => {
       return err.response
     })
 
+}
+
+export const updateEvent = (eventId, newEvent) => {
+  const { title, summary, categoryId, organizer, about, eventPic, tickets, dates } = newEvent
+
+  const formData = new FormData();
+  formData.append('eventId', eventId)
+  formData.append('title', title)
+  formData.append('summary', summary)
+  formData.append('organizer', organizer)
+  formData.append('categoryId', categoryId)
+  formData.append('tickets', tickets)
+  formData.append('eventDates', dates)
+  if (about) {
+    formData.append('about', about)
+  }
+  if (eventPic) {
+    formData.append('eventPic', eventPic)
+  }
+
+  const config = {
+    method: 'PUT',
+    headers: {
+      'content-type': 'multipart/form-data'
+    }
+  }
+
+  return Axios.put('/api/events/', formData, config)
+    .catch((err) => {
+      return err.response
+    })
 }
 
 const initialState = []

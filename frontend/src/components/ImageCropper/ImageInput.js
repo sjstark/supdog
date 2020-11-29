@@ -17,6 +17,12 @@ const ImageInput = ({ aspect, value, onChange, width, height }) => {
 
   useEffect(() => {
     if(value) {
+      if (value.startsWith('http')) {
+        setBlobURL(value)
+        setFileName('Previous Upload')
+
+        return
+      }
       let urlCreator = window.URL || window.webkitURL;
       setBlobURL(urlCreator.createObjectURL(value))
       setFileName('Previous Upload')
