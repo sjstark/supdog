@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import compress from 'compress.js'
 
 import * as sessionActions from '../../store/session'
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import FormInput from '../FormInput'
 import ImageInput from '../ImageCropper/ImageInput'
 
@@ -29,6 +29,8 @@ const resizeProfilePic = async (file) => {
 
 export default function SignupForm() {
   const dispatch = useDispatch()
+  const history = useHistory()
+
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')

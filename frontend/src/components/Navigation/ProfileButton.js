@@ -6,7 +6,7 @@ import { Link, useHistory } from 'react-router-dom'
 import { logout } from '../../store/session'
 import { changeView } from '../../store/view'
 
-
+import {fetch} from '../../store/csrf'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
@@ -16,6 +16,7 @@ export default function ProfileButton() {
   const history = useHistory()
 
   const [showMenu, setShowMenu] = useState(false)
+  const [profilePic, setProfilePic] = useState(null)
 
   const sessionUser = useSelector(state => state.session.user)
 
@@ -39,6 +40,14 @@ export default function ProfileButton() {
     }
   }, [showMenu])
 
+  useEffect(() => {
+    (async () => {
+      let res = await fetch(`/api/session`)
+      setProfilePic(res.data.user.profilePicURL)
+    })();
+  }, [sessionUser])
+
+
   const handleLogout = (e) => {
     e.preventDefault()
     dispatch(logout())
@@ -56,8 +65,8 @@ export default function ProfileButton() {
         <div className="navbar__user-container-dropdown">
           <i className="fas fa-caret-down"></i>
         </div>
-        {sessionUser.profilePicURL && (<img className="navbar__profile-icon" src={sessionUser.profilePicURL} alt="" />)}
-        {!sessionUser.profilePicURL && <FontAwesomeIcon icon={faUserCircle} className="navbar__profile-icon" />}
+        {profilePic && (<img className="navbar__profile-icon" src={profilePic + `?uniqueQuery=${encodeURI((new Date()).toISOString())}`} alt="" />)}
+        {!profilePic && <FontAwesomeIcon icon={faUserCircle} className="navbar__profile-icon--default" />}
 
         <div className={`navbar__profile-dropdown ${showMenu ? "navbar__profile-dropdown--shown" : "navbar__profile-dropdown--hidden"}`}>
           <div className="navbar__dropdown-user-info">

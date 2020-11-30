@@ -50,7 +50,7 @@ export default function EventDetails() {
     <>
       {event && (
         <div className="event-details__container">
-          {event.organizer && (event.organizer.id == sessionUser.id ) && (
+          {event.organizer && sessionUser && (event.organizer.id === sessionUser.id ) && (
             <div onClick={editEvent} className="button event-details__edit-button">
               <i className="fas fa-pencil-alt"></i>
             </div>

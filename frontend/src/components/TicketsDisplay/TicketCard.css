@@ -47,10 +47,6 @@
   padding-left: 20px;
 }
 
-.ticket-card__details * {
-  /* margin-bottom: 10px; */
-}
-
 .ticket-card__buttons-container {
   display: flex;
   justify-content: space-around;

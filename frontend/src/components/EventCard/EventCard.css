@@ -19,10 +19,10 @@
   z-index: 12;
   position: absolute;
 
-  background-color: rgba(0,0,0,.6);
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
 
-  font-size: .9em;
+  font-size: 0.9em;
 
   width: 50px;
   height: 30px;
@@ -37,14 +37,13 @@
 
   top: 20px;
   left: 37px;
-  transition: all .6s;
+  transition: all 0.6s;
 }
 
 .event-card__wrapper:hover .event-card__date-banner {
   top: 55px;
   left: 0px;
-  transition: all .6s ease-out;
-
+  transition: all 0.6s ease-out;
 }
 
 .event-card__floating-details-title {
@@ -55,17 +54,16 @@
   font-size: 20px;
   text-align: center;
 
-  top: 260px;
-  transition: all .5s ease-in-out;
+  align-self: center;
 
+  top: 260px;
+  transition: all 0.5s ease-in-out;
 }
 
 .event-card__wrapper:hover .event-card__floating-details-title {
   top: 207px;
-  transition: all .4s ease-in-out;
-
+  transition: all 0.4s ease-in-out;
 }
-
 
 .event-card__foreground {
   position: absolute;
@@ -88,7 +86,7 @@
   align-items: center;
   justify-content: center;
 
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .event-card__wrapper:hover .event-card__picture-wrapper {
@@ -104,14 +102,14 @@
   align-items: center;
   justify-content: center;
 
-  box-shadow: 0 0 20px rgba(0,0,0,.6);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
 
-  transition: all .4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
 
 .event-card__wrapper:hover .event-card__foreground-details {
   opacity: 0;
-  transition: all .1s;
+  transition: all 0.1s;
 }
 
 .event-card__picture {
@@ -147,12 +145,11 @@
   align-items: center;
 }
 
-.event-card__foreground-details-organizer span{
+.event-card__foreground-details-organizer span {
   font-size: 12px;
   margin-left: 10px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
-
 
 .event-card__foreground-details-ticket-count {
   display: flex;
@@ -160,7 +157,7 @@
   align-items: center;
   flex-direction: row;
 
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .fa-ticket-alt {
@@ -177,16 +174,14 @@
  * ─── BACKGROUND ─────────────────────────────────────────────────────────────────
  */
 
-
 .event-card__background {
-
   opacity: 0;
   z-index: -1;
   position: absolute;
 
   overflow: hidden;
 
-  width:0;
+  width: 0;
   height: 0;
 
   top: 40px;
@@ -196,32 +191,31 @@
 
   border-radius: 20px;
 
-  box-shadow: 0 0 10px rgba(0,0,0,.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  transition: all .5s ease-in-out;
-
+  transition: all 0.5s ease-in-out;
 }
 
 .event-card__wrapper:hover .event-card__background {
   opacity: 1;
-  width:250px;
+  width: 250px;
   height: 400px;
-  transition: all .5s ease-in-out .075s;
+  transition: all 0.5s ease-in-out 0.075s;
 }
 
 .event-card__background:hover {
   opacity: 1;
-  width:250px;
+  width: 250px;
   height: 400px;
-  transition: all .5s ease-in-out .075s;
-
+  transition: all 0.5s ease-in-out 0.075s;
 }
 
 .event-card__background-image {
+  transform: scale(1.1);
   filter: blur(8px);
   width: 100%;
   min-height: 125px;
@@ -230,7 +224,7 @@
 .event-card__background-details {
   justify-self: flex-end;
 
-  height:200px;
+  height: 200px;
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -244,8 +238,8 @@
   text-align: center;
 }
 
-.event-card__background-summary{
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.event-card__background-summary {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .event-card__background-tickets {
@@ -264,7 +258,7 @@
 }
 
 .event-card__background-tickets * {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .event-card__background .button {
@@ -273,5 +267,5 @@
 }
 
 div.event-card__background div.button:hover {
-  box-shadow: 1px 2px 4px rgba(0,0,0,.3);
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
 }

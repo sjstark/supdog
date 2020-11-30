@@ -67,8 +67,6 @@ router.delete(
   asyncHandler(async (req, res) => {
     let {ticketId} = req.params
 
-    console.log(ticketId)
-
     let ticket = await SoldTicket.findOne({
       where: {
         userId: req.user.id,

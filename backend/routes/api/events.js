@@ -120,15 +120,6 @@ router.put(
       eventPicURL = await singlePublicFileUpload(req.file, 'event-pics')
     }
 
-    console.log({
-      title,
-      summary,
-      about,
-      organizer,
-      categoryId,
-      eventPic
-    })
-
     event.title = title ? title : event.title
     event.summary = summary ? summary : event.summary
     event.about = about ? about : event.about

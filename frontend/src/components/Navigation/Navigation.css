@@ -1,20 +1,18 @@
-.navbar__container{
+.navbar__container {
   z-index: 10;
 
   position: fixed;
   height: 60px;
   width: 100vw;
 
-
   display: flex;
 
   justify-content: space-between;
   align-items: center;
 
-  border-bottom: 1px solid rgba(0,0,0,.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   background-color: white;
-
 }
 
 .navbar__logo {
@@ -23,22 +21,21 @@
 }
 
 .navbar__right-container {
-  display:flex;
+  display: flex;
   align-items: center;
 }
 
 .navbar__links {
-  display:flex;
+  display: flex;
   align-items: center;
   padding-left: 10px;
 
-  border-left: 1px solid rgba(0,0,0,.1);
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 /*
  * ─── SEARCH BAR FORMATTING ──────────────────────────────────────────────────────
  */
-
 
 .navbar__search {
   position: relative;
@@ -60,15 +57,15 @@
 
 .navbar__search--closed {
   width: 40px;
-  box-shadow: 0 0 5px rgba(0,0,0,0);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0);
 
-  transition: background-color .2s , all .3s;
+  transition: background-color 0.2s, all 0.3s;
 }
 
 .navbar__search--open {
   width: 200px;
-  box-shadow: 0 0 5px rgba(0,0,0,.3);
-  transition: all .5s;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.5s;
 }
 
 .navbar__search i {
@@ -78,8 +75,8 @@
 
 .navbar__search--closed:hover {
   background-color: whitesmoke;
-  box-shadow: 1px 2px 4px rgba(0,0,0,.3);
-  transition: all .2s;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s;
 }
 
 .navbar__search input {
@@ -90,7 +87,6 @@
 
   background: none;
 }
-
 
 .navbar__button {
   display: block;
@@ -109,13 +105,12 @@
 
   cursor: pointer;
 
-  transition: all .1s;
+  transition: all 0.1s;
 }
 
 .navbar__button:hover {
   background-color: whitesmoke;
-  box-shadow: 1px 2px 4px rgba(0,0,0,.3);
-
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .navbar__button--primary {
@@ -143,8 +138,8 @@
 
 .navbar__user-container-dropdown {
   position: absolute;
-  right:0;
-  top:5px;
+  right: 0;
+  top: 5px;
   width: 70px;
   height: 30px;
 
@@ -156,13 +151,13 @@
   justify-content: flex-start;
   align-items: center;
 
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
-.navbar__user-container:hover .navbar__user-container-dropdown{
+.navbar__user-container:hover .navbar__user-container-dropdown {
   position: absolute;
   right: 0;
-  top:0px;
+  top: 0px;
   width: 80px;
   height: 40px;
 
@@ -174,8 +169,7 @@
   justify-content: flex-start;
   align-items: center;
 
-  transition: all .3s;
-
+  transition: all 0.3s;
 }
 
 .navbar__user-container i {
@@ -188,16 +182,14 @@
   justify-content: center;
   align-items: center;
 
-  transition: all .3s;
-
+  transition: all 0.3s;
 }
 .navbar__user-container:hover i {
   margin-left: 5px;
 
   background-color: rgb(182, 182, 182);
 
-  transition: all .3s;
-
+  transition: all 0.3s;
 }
 
 .navbar__profile-icon {
@@ -210,6 +202,21 @@
   border: 2px solid white;
 
   right: 0;
+}
+
+.navbar__profile-icon--default {
+  font-size: 40px !important;
+  border: 2px solid white;
+
+  background-color: white;
+  color: rgb(50, 123, 248);
+
+  z-index: 21;
+  position: absolute;
+  border-radius: 50%;
+
+  right: 0;
+  /* padding: 10px !important; */
 }
 
 .navbar__profile-dropdown {
@@ -225,12 +232,11 @@
   border-radius: 20px;
 
   background-color: white;
-  box-shadow: 0 0 10px rgba(0,0,0,.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
-  transition: all .5s;
+  transition: all 0.5s;
   overflow: hidden;
 }
-
 
 .navbar__profile-dropdown--shown {
   width: 200px;
@@ -238,8 +244,8 @@
 }
 
 .navbar__profile-dropdown--hidden {
-  width:0;
-  height:0px;
+  width: 0;
+  height: 0px;
 
   top: 5px;
   right: 5px;
@@ -257,11 +263,11 @@
 
 .navbar__dropdown-text:last-child {
   font-size: 12px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .navbar__dropdown-links {
-  border-top: 1px solid rgba(0,0,0,.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 
   display: flex;
   flex-direction: column;
@@ -270,17 +276,16 @@
 }
 
 .navbar__dropdown-link {
-  width:100%;
+  width: 100%;
   padding: 10px 20px;
   text-decoration: none;
   color: grey;
   cursor: pointer;
 
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .navbar__dropdown-link:hover {
-  color:white;
+  color: white;
   background-color: rgb(50, 123, 248);
 }
