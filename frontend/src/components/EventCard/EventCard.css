@@ -38,13 +38,13 @@
   clip-path: polygon(0% 0%, 100% 0, 88% 50%, 100% 100%, 0% 100%);
 
   top: 20px;
-  left: 37px;
+  left: 15px;
   transition: all 0.6s;
 }
 
 .event-card__wrapper:hover .event-card__date-banner {
-  top: 55px;
-  left: 0px;
+  top: 65px;
+  left: -22px;
   transition: all 0.6s ease-out;
 }
 
