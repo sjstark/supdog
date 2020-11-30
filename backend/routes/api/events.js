@@ -225,6 +225,8 @@ router.get(
 router.get(
   '/search',
   asyncHandler(async (req, res) => {
+    const { start, amount } = req.query
+
     const searchParam = decodeURI(req.query.search)
 
     const events = await Event.findAll({
@@ -233,8 +235,9 @@ router.get(
           [Op.iLike]: `%${searchParam}%`
         }
       },
-      include: ['organizer', 'tickets', 'category', 'eventDates']
-
+      include: ['organizer', 'tickets', 'category', 'eventDates'],
+      limit: amount,
+      offset: start
     })
 
     res.json({ events })
