@@ -5,7 +5,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const { requireAuth } = require('../../utils/auth');
-const { Event, User, Ticket, EventDate, Sequelize } = require('../../db/models');
+const { Event, User, Ticket, EventDate, Sequelize, Like } = require('../../db/models');
 const { Op } = Sequelize
 
 const ticketsRouter = require('./tickets')
@@ -183,7 +183,48 @@ router.get(
         }
       ]
     })
+    let like = await Like.findOne({
+      where: {
+        eventId: id,
+        userId: req.user.id
+      }
+    })
+
+    if (like) {
+      event.liked = true
+    }
     res.json(event)
+  })
+)
+
+router.post(
+  '/:id(\\d+)/like',
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.id, 10)
+
+    const like = await Like.create({eventId: id, userId: req.user.id})
+
+    res.json(like)
+  })
+)
+
+router.delete(
+  '/:id(\\d+)/like',
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.id, 10)
+
+    let like = await Like.findOne({
+      where: {
+        eventId: id,
+        userId: req.user.id
+      }
+    })
+
+    await like.destroy()
+
+    res.json()
   })
 )
 
