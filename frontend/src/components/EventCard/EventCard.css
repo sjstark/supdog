@@ -121,10 +121,10 @@
 }
 
 .event-card__organizer-pic {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
-  border: 2px solid black;
+  /* border: 2px solid black; */
 }
 
 .event-card__foreground-details-title {

@@ -1,24 +1,19 @@
 # 'Sup Dog
 
-
-<img src='./resources/images/Index-Logo-Large.png' align="center" alt="Never Forget logo" width="300">
+<img src="./assets/logos/'SupDog-Logo.png" align="center" alt="Never Forget logo" width="300">
 <br>
-<img align=center alt="" src='https://img.shields.io/endpoint?url=https%3A%2F%2Fapp-never-forget.herokuapp.com%2Fstats%2Ftasks-created'>
 
-
-**Never Forget** is an organization focused to-do list tracker web app that allows users to manage their day-to-day lives. Never Forget is a clone that uses [Remember the Milk](https://www.rememberthemilk.com/) as inpiration.
+**'SupDog** is an events forum designed to help schedule and spread knowledge of events. 'SupDog is a clone that uses [Eventbrite](https://www.eventbrite.com/) as content inpiration and [Popdog](https://popdog.com/) as style inspiration.
 
 ## Demo
 
-Here is a working live demo: [https://app-never-forget.herokuapp.com](https://app-never-forget.herokuapp.com)
+Here is a working live demo: [https://supdog-app.herokuapp.com/](https://supdog-app.herokuapp.com/)
 
 ## Site
 
 ### Landing Page
 
-
 <img src='./resources/images/landing-page.png' >
-
 
 ### User Authentication
 
@@ -56,7 +51,6 @@ Users can use the search bar in the top of the page to search all of their tasks
 
 <img src="./resources/images/app-page-search.png">
 
-
 ## Usage
 
 ### Development
@@ -69,59 +63,66 @@ To fix a bug or add a feature, follow these steps:
 - Create a new branch with `git checkout -b feature-branch-name`
 - Make appropriate changes to the files and push back to github
 - Create a Pull Request
-   - Use a clear and descriptive title for the issue to identify the suggestion.
-   - Include any relevant issue numbers in the PR body, not the title.
-   - Provide a comprehensive description of all changes made.
+  - Use a clear and descriptive title for the issue to identify the suggestion.
+  - Include any relevant issue numbers in the PR body, not the title.
+  - Provide a comprehensive description of all changes made.
 
 #### Setting Up and Starting a Local Server
 
-1. Download code and `npm install` to install all node dependencies
-2. Create a psql db user with createdb privileges. The default is `never_forget_app` with a password of `password`.
+1. Download code and `npm install` in `/backend` to install all node dependencies for backend server
+2. Create a psql db user with createdb privileges.
    - Duplicate the `.env.example` for the `dotenv` package.
    - Update the following variables:
-      - `PORT` the port that the server will listen to, 8080 by default
-      - `DB_USERNAME` the user of the created psql db user
-      - `DB_PASSWORD` the password for the psql db user
-      - `SESSION_SECRET` a session secret key for encrypting session id's in the database
-      - All other variables should remain the same
+     - `PORT` the port that the server will listen to, 8080 by default
+     - `DB_USERNAME` the user of the created psql db user
+     - `DB_PASSWORD` the password for the psql db user
+     - `SESSION_SECRET` a session secret key for encrypting session id's in the database
+     - All other variables should remain the same
 3. Setup PostgreSQL database
    - Run `npx dotenv sequelize db:create`
    - Run `npx dotenv sequelize db:migrate`
    - Run `npx dotenv sequelize db:seed:all`
-4. Start express server by running `npm start` in the root project directory
-5. The server will start on `http://localhost:8080`
+4. Setup AWS S3 Buckets.
+   - Update `backend/credentials.json` based off the example for your AWS S3 Buckets
+5. Start express server by running `npm start` in the `/backend` directory
+6. The backend server will start on `http://localhost:5000`
+7. Run `npm install` in `/frontend` to install dependencies for frontend server.
+8. Run `npm start in the `/frontend` directory
+9. The frontend server will be live on `http://localhost:3000` by default
 
 ### Bug / Feature Request
 
-We love squashing bugs! If you find one, let our exterminators know by opening an issue [here](https://github.com/sjstark/Never-Forget/issues). Be sure to be clear in the description of the bug (i.e. what was input into the field that caused the bug). Screenshots or recordings greatly help!
+We love squashing bugs! If you find one, let our exterminators know by opening an issue [here](https://github.com/sjstark/supdog/issues). Be sure to be clear in the description of the bug (i.e. what was input into the field that caused the bug). Screenshots or recordings greatly help!
 
-If you'd like to request a new feature open up an issue [here](https://github.com/sjstark/Never-Forget/issues). This project was created as part of [App Academy's](https://www.appacademy.io/) coursework, but we love dreaming up of ways to improve our work.
+If you'd like to request a new feature open up an issue [here](https://github.com/sjstark/supdog/issues). This project was created as part of [App Academy's](https://www.appacademy.io/) coursework, but we love dreaming up of ways to improve our work.
 
 ### TODOs
+
+- Right now, this project is lacking server side database ordering. A branch has been started with steps towards implementing this.
 - We'd love to go through and tidy up our code. We know theres several locations we can refactor and leave comments for easier use in the future.
 
 ## Built With
-
 
 <a href="#Built-With"><img alt="npm" src="https://img.shields.io/badge/-NPM-CB3837?style=flat-square&logo=npm&logoColor=white" /></a>
 <a href="#Built-With"><img alt="Nodejs" src="https://img.shields.io/badge/-Nodejs-43853d?style=flat-square&logo=Node.js&logoColor=white" /></a>
 <a href="#Built-With"><img alt="html5" src="https://img.shields.io/badge/-HTML5-E34F26?style=flat-square&logo=html5&logoColor=white" /></a>
 <a href="#Built-With"><img alt="CSS" src="https://img.shields.io/badge/-CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white" /></a>
 <br>
+<a href="https://reactjs.org/"><img alt="React" src="https://img.shields.io/badge/-React-61DAFB?style=flat-square&logo=React&logoColor=black" /></a>
+<a href="https://redux.js.org/"><img alt="Redux" src="https://img.shields.io/badge/-Redux-764ABC?style=flat-square&logo=Redux&logoColor=white" /></a>
+<a href="https://heroku.com/"><img alt="Heroku" src="https://img.shields.io/badge/-Heroku-430098?style=flat-square&logo=Heroku&logoColor=white" /></a>
+<br>
 <a href="https://www.postgresql.org/"><img alt="PostgreSQL" src="https://img.shields.io/badge/-PostgreSQL-336791?style=flat-square&logo=PostgreSQL&logoColor=white" /></a>
 <a href="https://sequelize.org/"><img alt="Sequelize" src="https://img.shields.io/badge/-Sequelize-336791?style=flat-square" /></a>
 <a href="https://expressjs.com/"><img alt="Express" src="https://img.shields.io/badge/-Express-000000?style=flat-square" /></a>
-<a href="https://pugjs.org/"><img alt="Pug" src="https://img.shields.io/badge/-Pug-A86454?style=flat-square" /></a>  
-_And that's it! We're really proud of our vanilla CSS and vanilla JavaScript AJAX development!_
-
 
 ## Team
 
 | [Brandon Perry](https://github.com/Brandon-Perry) | [Dez Adkins](https://github.com/dezadkins) | [Miguel Munoz](https://github.com/memg92) | [Sam Stark](https://github.com/sjstark) |
-|-|-|-|-|
+| ------------------------------------------------- | ------------------------------------------ | ----------------------------------------- | --------------------------------------- |
+
 
 <img alt='' width=75px; align=center src="./resources/images/peanut.png">
-
 
 <!-- <div style="display: grid; grid-template-columns: auto auto; " align="center">
   <a href="https://github.com/Brandon-Perry">
