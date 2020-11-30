@@ -5,7 +5,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const { requireAuth } = require('../../utils/auth');
-const { Event, User, Ticket, EventDate, Sequelize } = require('../../db/models');
+const { Event, User, Ticket, EventDate, Category, Sequelize, sequelize } = require('../../db/models');
 const { Op } = Sequelize
 
 const ticketsRouter = require('./tickets')
@@ -153,11 +153,71 @@ router.get(
   asyncHandler(async (req, res) => {
     const { start, amount } = req.query
 
+
     const events = await Event.findAll({
+      raw : true,
+      attributes : {include: [sequelize.fn('min', sequelize.col('eventDates.start')),'earliest']},
+      include : [
+        {
+          model: User,
+          as:'organizer',
+          attributes: ['id', 'username', 'profilePicURL']
+        },
+        {
+          model: Ticket,
+          as: 'tickets',
+          attributes: ['id', 'eventId', 'name', 'quanteity', 'sold']
+        },
+        {
+          model: Category,
+          as: 'category',
+          attributes: ['id', 'title']
+        },
+        {
+          model : EventDate ,
+          as: 'eventDates',
+          attributes: ['id', 'eventId', 'start', 'end']
+        }
+      ],
+      group : ['Event.id','eventDates.eventId', 'organizer.id', 'tickets.id', 'category.id'],
       offset: start,
       limit: amount,
-      include: ['organizer', 'tickets', 'category', 'eventDates']
     })
+
+    console.log(events)
+    // const events = await Event.findAll({
+    //   // order: [sequelize.fn('min', {Event.associations.EventDate, 'start'})],
+    //   // attributes: {
+    //   //   include: [
+    //   //     [sequelize.fn('MIN', sequelize.col('start')), 'earliestdate']
+    //   //   ]
+    //   // },
+    //   raw: true,
+
+    //   include: ['organizer', 'tickets', 'category', {
+    //     model: EventDate,
+    //     as: 'eventDates',
+    //     raw: true,
+    //     attributes: {
+    //       include: [
+    //         [sequelize.fn('min', sequelize.col('start')), 'earliest']
+    //       ]
+    //     },
+    //     // order: ['start']
+    //   }],
+    //   // order: [
+    //   //   [
+    //   //     {
+    //   //       model: EventDate,
+    //   //       as: 'eventDates'
+    //   //     },
+    //   //     'earliest'
+    //   //   ]
+    //   // ],
+    //   group: ['Event.id', 'EventDates.eventId'],
+    //   offset: start,
+    //   limit: amount,
+    // })
 
     return res.json({ events })
   })
