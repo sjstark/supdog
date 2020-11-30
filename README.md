@@ -28,43 +28,63 @@ Here is a working live demo: [https://supdog-app.herokuapp.com/](https://supdog-
 
 ### Landing Page
 
-<img src='./resources/images/landing-page.png' >
+<img src='./assets/screenshots/logged-out-splash.png' >
 
 ### User Authentication
 
 #### Login
 
-<img src='./resources/images/login-page.png' >
+<img src='./assets/screenshots/login-modal.png' >
 
 #### Signup
 
-<img src='./resources/images/signup-page.png' >
+<img src='./assets/screenshots/signup-modal.png' >
+
+#### Profile Options
+
+<img src="./assets/screenshots/profile-modal.png">
 
 ### Application
 
-#### Task List
+#### Event Display
 
-Upon load, users will see all tasks displayed as a list. Users can add new tasks with the input at the top of the list. Users can also mark tasks as complete with the checkbox.
+<img src="./assets/screenshots/logged-in-splash.png">
 
-<img src="./resources/images/app-page-incomplete.png">
+<img src="./assets/screenshots/event-card.png">
 
-#### Task Details
+<img src="./assets/screenshots/load-more-events.png">
 
-After clicking a specific task, a panel of task details appears. Users can change the properties of their task or delete a task from this panel.
+#### Categories
 
-<img src="./resources/images/app-page-listdetails.png">
+<img src="./assets/screenshots/categories-bar.png">
 
-#### Lists
-
-Users can access the lists that tasks have been organized into from a panel on the left. New lists can be added, list names edited, and lists deleted with all associated tasks from this panel. In list view, a user can see a breakdown of tasks incomplete vs. tasks completed along with the estimated time to complete all incomplete tasks.
-
-<img src="./resources/images/app-page-listview.png">
+<img src="./assets/screenshots/category-view.png">
 
 #### Search
 
-Users can use the search bar in the top of the page to search all of their tasks with keywords or phrases
+<img src="./assets/screenshots/search.png">
 
-<img src="./resources/images/app-page-search.png">
+#### Event Details
+
+<img src="./assets/screenshots/logged-in-event-detail.png">
+
+#### Event Creation and Edit
+
+<img src="./assets/screenshots/event-create-details.png">
+
+<img src="./assets/screenshots/event-create-image.png">
+
+<img src="./assets/screenshots/event-create-dates.png">
+
+<img src="./assets/screenshots/event-create-tickets.png">
+
+#### My Events
+
+<img src="./assets/screenshots/my-events.png">
+
+#### My Events
+
+<img src="./assets/screenshots/my-tickets.png">
 
 ## Usage
 
