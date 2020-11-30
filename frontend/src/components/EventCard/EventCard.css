@@ -248,6 +248,7 @@
 .event-card__background-summary {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 15px;
+  text-align: center;
 }
 
 .event-card__background-tickets {
