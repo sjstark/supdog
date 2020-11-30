@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 
 import { logout } from '../../store/session'
-import { changeView } from '../../store/view'
+import { changeView, clearView } from '../../store/view'
 
 import {fetch} from '../../store/csrf'
 
@@ -51,6 +51,8 @@ export default function ProfileButton() {
   const handleLogout = (e) => {
     e.preventDefault()
     dispatch(logout())
+    dispatch(clearView())
+    history.push('/')
   }
 
   const setMyEvents = (e) => {
