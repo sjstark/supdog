@@ -14,6 +14,7 @@ function EventDisplay({ events, view, myEvents }) {
   const dispatch = useDispatch()
   const [isLoaded, setIsLoaded] = useState(false)
   const [viewName, setViewName] = useState('All Events')
+  const [loadMore, setLoadMore] = useState(true)
 
   const changeViewName = async (view) => {
 
@@ -34,6 +35,10 @@ function EventDisplay({ events, view, myEvents }) {
     }
 
   }
+
+  useEffect(() => {
+    setLoadMore(true)
+  }, [events])
 
 
   useEffect(() => {
@@ -59,7 +64,8 @@ function EventDisplay({ events, view, myEvents }) {
   const getMoreEvents = async (e) => {
     e.stopPropagation();
     setIsLoaded(false)
-    await dispatch(loadMoreEvents(events.length, 10, view))
+    let loadedEvents = await dispatch(loadMoreEvents(events.length, 10, view))
+    if (~loadedEvents || loadedEvents.length < 10) setLoadMore(false)
     setIsLoaded(true)
   }
 
@@ -73,7 +79,6 @@ function EventDisplay({ events, view, myEvents }) {
               <div style={{ height: '50vh' }}> There are no events for this yet!</div>
             )}
             {events && events
-              // .slice(0, 1)
               .map((event) => {
 
                 return (
@@ -85,12 +90,20 @@ function EventDisplay({ events, view, myEvents }) {
       </ul>
       {isLoaded && (
         <>
-          {events.length > 0 && (
+          {(
             <div className="event-display__show-more-wrapper">
               <div className="event-display__show-more-line" />
-              <div className="event-display__show-more-button-wrapper">
-                <div onClick={getMoreEvents} className="button button--primary button--large">Load More Events</div>
-              </div>
+              {loadMore && (
+                <div className="event-display__show-more-button-wrapper">
+                  <div onClick={getMoreEvents} className="button button--primary button--large">Load More Events</div>
+                </div>
+              )}
+              {!loadMore && (
+                <div className="event-display__show-more-button-wrapper">
+                  <div className="button button--primary button--large button--disabled">All Events Loaded</div>
+                </div>
+              )}
+
             </div>
           )}
           <Footer />

@@ -9,6 +9,7 @@
   transition: width 0.1s;
 
   overflow-x: hidden;
+  overflow-y: hidden;
 
   position: fixed;
   background-color: rgb(232, 239, 243);
