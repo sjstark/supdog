@@ -34,7 +34,7 @@ module.exports = {
     let soldTickets = []
     tickets.forEach(async ticket => {
 
-      let randomNum =  seederUtils.getRandomInt(3, ticket.quantity)
+      let randomNum =  seederUtils.getRandomInt(5, ticket.quantity)
       for( let j = 0; j < randomNum; j++) {
         let userId = seederUtils.selectRandom(fakeUserIds)
         soldTickets.push({
