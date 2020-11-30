@@ -49,7 +49,7 @@ module.exports = {
         organizerId: demoUser.id,
         eventPicURL: await getImage(1000, 500) || null,
         summary: "Our Annual Family Reunion!",
-        about: faker.lorem.paragraphs(),
+        about: faker.lorem.paragraphs(3),
         categoryId: categories['Family & Education']
       },
       {
@@ -73,7 +73,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Music']
           }
         )
@@ -90,7 +90,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Auto, Boat, & Air']
           }
         )
@@ -107,7 +107,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Charity & Causes']
           }
         )
@@ -125,7 +125,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.company.catchPhrase(),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Business & Professional']
           }
         )
@@ -143,7 +143,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Community & Culture']
           }
         )
@@ -161,7 +161,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Family & Education']
           }
         )
@@ -179,7 +179,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Fashion & Beauty']
           }
         )
@@ -197,7 +197,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Film, Media, & Entertainment']
           }
         )
@@ -215,7 +215,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Food & Drink']
           }
         )
@@ -233,7 +233,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Health & Wellness']
           }
         )
@@ -251,7 +251,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Government & Politics']
           }
         )
@@ -269,7 +269,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Home & Lifestyle']
           }
         )
@@ -287,7 +287,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Other']
           }
         )
@@ -305,7 +305,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Performing & Visual Arts']
           }
         )
@@ -323,7 +323,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Religion & Spirituality']
           }
         )
@@ -341,7 +341,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['School Activities']
           }
         )
@@ -359,7 +359,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Science & Technology']
           }
         )
@@ -377,7 +377,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Seasonal & Holiday']
           }
         )
@@ -395,7 +395,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Sports & Fitness']
           }
         )
@@ -413,7 +413,7 @@ module.exports = {
             organizerId: seederUtils.selectRandom(fakeUserIds),
             eventPicURL: await getImage(1000, 500) || null,
             summary: faker.lorem.sentence().slice(0,120),
-            about: faker.lorem.paragraphs(),
+            about: faker.lorem.paragraphs(3),
             categoryId: categories['Travel & Outdoor']
           }
         )

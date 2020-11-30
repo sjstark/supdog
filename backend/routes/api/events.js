@@ -168,7 +168,20 @@ router.get(
   asyncHandler(async (req, res) => {
     const id = parseInt(req.params.id, 10)
     const event = await Event.findByPk(id, {
-      include: ['organizer', 'tickets', 'category', 'eventDates']
+      include: [
+        'organizer',
+        {
+          model: Ticket,
+          as: 'tickets',
+          order: ['id']
+        },
+        'category',
+        {
+          model: EventDate,
+          as: 'eventDates',
+          order: ['start']
+        }
+      ]
     })
     res.json(event)
   })
