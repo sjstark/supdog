@@ -48,21 +48,27 @@ Here is a working live demo: [https://supdog-app.herokuapp.com/](https://supdog-
 
 #### Event Display
 
-<img src="./assets/screenshots/logged-in-splash.png">
+<img src="./assets/screenshots/event-display.gif">
+
+<!-- <img src="./assets/screenshots/logged-in-splash.png">
 
 <img src="./assets/screenshots/event-card.png">
 
-<img src="./assets/screenshots/load-more-events.png">
+<img src="./assets/screenshots/load-more-events.png"> -->
 
 #### Categories
 
-<img src="./assets/screenshots/categories-bar.png">
+<img src="./assets/screenshots/categories.gif">
 
-<img src="./assets/screenshots/category-view.png">
+<!-- <img src="./assets/screenshots/categories-bar.png">
+
+<img src="./assets/screenshots/category-view.png"> -->
 
 #### Search
 
-<img src="./assets/screenshots/search.png">
+<!-- <img src="./assets/screenshots/search.png"> -->
+
+<img src="./assets/screenshots/search.gif">
 
 #### Event Details
 
@@ -70,13 +76,15 @@ Here is a working live demo: [https://supdog-app.herokuapp.com/](https://supdog-
 
 #### Event Creation and Edit
 
-<img src="./assets/screenshots/event-create-details.png">
+<img src="./assets/screenshots/event-create.gif">
+
+<!-- <img src="./assets/screenshots/event-create-details.png">
 
 <img src="./assets/screenshots/event-create-image.png">
 
 <img src="./assets/screenshots/event-create-dates.png">
 
-<img src="./assets/screenshots/event-create-tickets.png">
+<img src="./assets/screenshots/event-create-tickets.png"> -->
 
 #### My Events
 
