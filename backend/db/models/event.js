@@ -39,6 +39,9 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'eventId',
       as: 'tickets'
     })
+    Event.hasMany(models.Like, {
+      foreignKey: 'eventId'
+    })
     Event.belongsTo(models.Category, {
       foreignKey: 'categoryId',
       as: 'category'
