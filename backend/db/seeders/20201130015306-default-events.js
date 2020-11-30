@@ -1,11 +1,12 @@
 'use strict';
-const { Sequelize, User, Category } = require('../models');
+const { Sequelize, User, Category, Event, Ticket } = require('../models');
 
 const fetch = require('node-fetch')
 
 const faker = require('faker');
 
-const seederUtils = require('./utils')
+const seederUtils = require('./utils');
+const { getRandomInt } = require('./utils');
 
 const getImage = async (width, height) => {
   let res = await fetch(`https://picsum.photos/${width}/${height}`)
@@ -17,6 +18,8 @@ const Op = Sequelize.Op;
 let fakeUsers;
 let fakeUserIds
 let demoUser
+
+let createdEvents
 
 let categories = {}
 
@@ -444,11 +447,10 @@ module.exports = {
 
       fakeEvents = shuffle(fakeEvents)
       console.log('Events Shuffled')
-      console.log(fakeEvents)
     })
-    .then(() =>{
+    .then(async () =>{
       console.log('Inserting All fakeEvents into Database')
-      queryInterface.bulkInsert('Events', fakeEvents)
+      createdEvents = await queryInterface.bulkInsert('Events', fakeEvents)
       console.log('Insertion Complete')
       console.log('Events Seeding Complete!')
     })

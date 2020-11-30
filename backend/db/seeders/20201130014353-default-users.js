@@ -34,7 +34,7 @@ module.exports = {
         profilePicURL: 'https://supdog-hosting.s3.us-east-2.amazonaws.com/Demolition.jpg'
       },
       ...fakeUsers
-    ], {});
+    ], {})
   },
 
   down: (queryInterface, Sequelize) => {
